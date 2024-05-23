@@ -1,0 +1,6 @@
+#Git ignora los archivos que querramos ignorar
+
+#Ignora los archivos que terminen en .pyc
+#*.pyc
+
+__pycache__
