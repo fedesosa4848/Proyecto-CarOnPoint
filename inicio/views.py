@@ -64,11 +64,12 @@ def template4(request,nombre,apellido):
     }
 
     
-    return render(request,'template2.html',datos), 
+    return render(request,'template4.html',datos), 
 
-def probando (request):
+def probando(request):
     
     lista = list(range(500))
     
-    numeros = random.choices(lista, k = 50)
-    return render(request,'probando_if_for.hmtl',{"numero" : numeros})
+    numeros = random.choices(lista, k=50)
+    print(numeros)
+    return render(request, 'probando_if_for.html', {'numeros': numeros})

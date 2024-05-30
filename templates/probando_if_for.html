@@ -6,10 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-    <ul> 
-        {% for num  in numeros  %}
-        <li>Pepito {{num}} </li>
-        {% endfor %}}
+    <ul>
+        {% for num in numeros %}
+            {% if num > 250 %}
+            <li style="color:red">Pepito {{num}}</li>
+            {% else %}
+            <li style="color:blue">Pepito {{num}}</li>
+            {% endif %}
+        {% endfor %}
     </ul>
+    
 </body>
 </html>
