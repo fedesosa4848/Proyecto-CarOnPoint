@@ -52,19 +52,17 @@ def template3(request,nombre,apellido):
     
     return HttpResponse(template_renderizado)
 
-def template4(request,nombre,apellido):
-        
+def template4(request, nombre, apellido):
     
     fecha = datetime.now()
     
     datos = {
-        'fecha' : datetime.now(),
-        'nombre' : nombre,
-        'apellido' : apellido
-    }
-
+        'fecha': fecha,
+        'nombre': nombre,
+        'apellido': apellido,
+        }
     
-    return render(request,'template4.html',datos), 
+    return render(request,'template4.html', datos)
 
 def probando(request):
     
