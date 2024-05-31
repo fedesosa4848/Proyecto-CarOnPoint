@@ -6,5 +6,6 @@ urlpatterns = [
     path('template2/<str:nombre>/<str:apellido>', views.template2),
     path('template3/<str:nombre>/<str:apellido>', views.template3),
     path('template4/<str:nombre>/<str:apellido>', views.template4),
-    path('probando', views.probando)
+    path('probando', views.probando),
+    path('autos/crear/', views.crear_Vehiculo)
 ]

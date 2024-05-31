@@ -3,10 +3,13 @@ from django.http import HttpResponse
 from django.template import Template,Context,loader
 from datetime import datetime
 import random
+from inicio.models import Vehiculo
+
 # Create your views here.
 #vista
 def inicio(request):
-    return HttpResponse('Hola mundo')
+    #return HttpResponse('Hola mundo')
+    return render(request, 'inicio/index.html')
 # Create your views here.
 
 def template1(request,nombre,apellido):
@@ -71,3 +74,8 @@ def probando(request):
     numeros = random.choices(lista, k=50)
     print(numeros)
     return render(request, 'probando_if_for.html', {'numeros': numeros})
+
+def crear_Vehiculo(request):
+    auto2 = Vehiculo (marca = 'Fiat', modelo = 'Siena')
+    auto2.save()
+    return render(request , 'Vehiculos-templates/creacion.html', {'auto2' : auto2})
