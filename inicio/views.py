@@ -73,7 +73,7 @@ def probando(request):
     
     numeros = random.choices(lista, k=50)
     print(numeros)
-    return render(request, 'inicio/index.html', {'numeros': numeros})
+    return render(request, 'probando_if_for.html', {'numeros': numeros})
 
 def crear_Vehiculo(request):
     auto2 = Vehiculo (marca = 'Fiat', modelo = 'Siena')
