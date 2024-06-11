@@ -1,6 +1,20 @@
 {% extends "base.html" %}
+{% load static %}
+{% block title_head %}
+Inicio
+{% endblock title_head %}
+
+{% block background_image %}
+{% static 'imagenes/background-inicio.jpg' %}
+{% endblock background_image %}
+
 {% block h1_header %}
-Bienvenido a mi proyecto Coder 
+Bienvenido a Meli
 {% endblock h1_header %}
 
-{% block content  %}{% endblock content  %}
+{% block about_this_page %}
+Descubre la nueva forma de comprar en línea con Meli: ¡donde la variedad y la comodidad se unen para brindarte la mejor experiencia de compra!
+{% endblock about_this_page %}
+
+{% block sub_info_info %}En nuestra plataforma, te ofrecemos una experiencia de compra en línea simple y eficiente, donde podrás encontrar una variedad de productos a precios competitivos...
+{% endblock sub_info_info %}

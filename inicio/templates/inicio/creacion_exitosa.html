@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 
 {% block title_head %}
-Crear Auto
+Solicitud Exitosa
 {% endblock title_head %}   
 
 {% block h1_header %}
-Creación de autos
+Auto Creado
 {% endblock h1_header %}
 
 {% block about_this_page %}
-Se creó un auto: {{ auto2.marca }}, {{ auto2.modelo }}
+<p>Marca: {{ vehiculo.marca }}</p>
+<p>Modelo: {{ vehiculo.modelo }}</p>
 {% endblock about_this_page %}

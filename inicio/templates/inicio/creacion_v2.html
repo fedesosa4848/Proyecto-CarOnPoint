@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title_head %}
+Crear Auto
+{% endblock title_head %}   
+
+{% block h1_header %}
+Creación de autos
+{% endblock h1_header %}
+
+{% block sub_info_info %}
+
+<form action= {% url "crear" %} method="POST">
+    {% csrf_token %}
+    <p>
+        <input type="text" name="marca" placeholder=Marca>
+    </p>
+    <p>
+        <input type="text" name="modelo" placeholder=Modelo>
+    </p>    
+    <input type="submit"  value="Enviar">
+
+</form>
+
+{% endblock sub_info_info %}
+
+
+
+{% block sub_info_title %}Datos del Vehiculo{% endblock sub_info_title %}
+
+{% block about_this_page %}{% endblock about_this_page %}

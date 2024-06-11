@@ -1,16 +1,27 @@
 {% extends "base.html" %}
-{% block h1_header %}
-Probando
-{% endblock h1_header %}
-{% block content  %}
+{% load static %}
 
-<ul>
-    {% for num in numeros %}
-        {% if num > 250 %}
-        <li style="color:red">Pepito {{num}}</li>
-        {% else %}
-        <li style="color:blue">Pepito {{num}}</li>
-        {% endif %}
-    {% endfor %}
-</ul>{% endblock content %}
+{% block title_head %}
+Porbando
+{% endblock title_head %}
+
+{% block background_image %}
+{% static 'imagenes/background-shop.jpg' %}
+{% endblock background_image %}
+
+
+{% block h1_header %}
+Nuestro Catálogo
+{% endblock h1_header %}
+
+{% block about_this_page %}
+Descubre una amplia selección de productos disponibles en nuestra plataforma. Desde electrónicos hasta artículos para el hogar, tenemos todo lo que necesitas al alcance de tu mano.{% endblock about_this_page %}
+
+{% block sub_info_title  %}
+Probando{% endblock sub_info_title %}
+
+{% block sub_info_info %}Probando{% endblock sub_info_info %}Probando
+
+
+
 
