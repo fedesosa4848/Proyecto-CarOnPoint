@@ -8,9 +8,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.inicio, name='inicio'),
-    path('probando', views.probando, name='probando'),
-    #path('autos/crear/<str:marca>/<str:modelo>/', views.crear_Vehiculo, name='crear')
-    path('autos/crear/', views.crear_auto_v2, name='crear')
+    path('catalogo-vehiculos', views.catalogo_vehiculos, name='catalogo-vehiculos'),
+    path('autos/crear/', views.crear_auto_v2, name='crear'),
 ]
 
 if settings.DEBUG:

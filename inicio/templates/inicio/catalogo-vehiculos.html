@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Catálogo de Vehículos</title>
+</head>
+<body>
+    <h1>Catálogo de Vehículos</h1>
+    <ul>
+        {% for vehiculo in vehiculos %}
+            <li>{{ vehiculo.marca }} - {{ vehiculo.modelo }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
