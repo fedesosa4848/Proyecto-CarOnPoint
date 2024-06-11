@@ -38,7 +38,7 @@
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> 
             <div class="container px-5">
-                <a class="navbar-brand" href="#!">Start Bootstrap</a>
+                <a class="navbar-brand" href="#!">{{ date_time|date:"d M Y H:i" }}</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -46,7 +46,7 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'catalogo-vehiculos' %}">Catalogo</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'crear' %}">Publicar</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Comprar</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href=" {% url "about-us" %} ">About Us</a></li>
                     </ul>
                 </div>
             </div>
@@ -87,11 +87,10 @@
                 <div class="row gx-5 align-items-center">
                     <div class="col-lg-8 col-xl-7">
                         <div class="text-center text-xl-start">
-                            <h2 class="fw-bolder">Let's build something together</h2>
-                            <p class="lead fw-normal text-muted mb-4">Ready to get started? Contact us today!</p>
+                            <h2 class="fw-bolder">Sumate a CarOnPoint Society</h2>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-xl-5 text-center"><a class="btn btn-primary btn-lg px-4 me-sm-3" href="#!">Contact us</a></div>
+                    <div class="col-lg-4 col-xl-5 text-center"><a class="btn btn-primary btn-lg px-4 me-sm-3" href=" {% url "sign-in" %} ">Sign In</a></div>
                 </div>
             </div>
         </section>

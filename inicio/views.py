@@ -1,5 +1,5 @@
-from django.shortcuts import render
-import random
+from django.shortcuts import render,redirect
+from .forms import CrearFormularioCliente, CrearFormularioDomicilio
 from inicio.models import Vehiculo
 from django.core.exceptions import ValidationError
 
@@ -8,16 +8,8 @@ from django.core.exceptions import ValidationError
 def inicio(request):
     return render(request, 'inicio/index.html')
 
-
-def probando(request):
-
-    return render(request, 'probando_if_for.html')
-
-def crear_Vehiculo(request,marca,modelo):
-    auto2 = Vehiculo (marca = marca, modelo = modelo)
-    auto2.save()
-    return render(request , 'Vehiculos-templates/creacion.html', {'auto2' : auto2})
-
+def about_me(request):
+    return render(request, 'about_us.html')
 
 def crear_auto_v2(request):
     if request.method == 'POST':
@@ -47,3 +39,21 @@ def crear_auto_v2(request):
 def catalogo_vehiculos(request):
     vehiculos = Vehiculo.objects.all()
     return render(request, 'inicio/catalogo_vehiculos.html', {'vehiculos': vehiculos})
+
+
+
+def crear_cliente(request):
+    if request.method == 'POST':
+        cliente_form = CrearFormularioCliente(request.POST)
+        domicilio_form = CrearFormularioDomicilio(request.POST)
+        if cliente_form.is_valid() and domicilio_form.is_valid():
+            domicilio = domicilio_form.save()
+            cliente = cliente_form.save(commit=False)
+            cliente.domicilio = domicilio
+            cliente.save()
+            return redirect('inicio/catalogo_vehiculos')  # Redirige a alguna vista después de crear el cliente
+    else:
+        cliente_form = CrearFormularioCliente()
+        domicilio_form = CrearFormularioDomicilio()
+    return render(request, 'crear_cliente.html', {'cliente_form': cliente_form, 'domicilio_form': domicilio_form})
+

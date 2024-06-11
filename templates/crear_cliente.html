@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title_head %}
+Crear Cliente
+{% endblock title_head %}
+
+{% block h1_header %}
+Crear Cliente
+{% endblock h1_header %}
+
+{% block sub_info_info %}
+    <form method="post">
+        {% csrf_token %}
+        <h2>Información del Cliente</h2>
+        {{ cliente_form.as_p }}
+        
+        <h2>Información del Domicilio</h2>
+        {{ domicilio_form.as_p }}
+        
+        <button type="submit">Crear Cliente</button>
+    </form>
+{% endblock sub_info_info %}

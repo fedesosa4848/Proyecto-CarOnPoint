@@ -1,19 +1,31 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Catálogo de Vehículos</title>
-</head>
-<body>
-    <h1>Catálogo de Vehículos</h1>
-    <ul>
+{% extends "base.html" %}
+
+{% block title_head %}
+Catálogo de Vehículos
+{% endblock title_head %}
+
+{% block h1_header %}
+Catálogo de Vehículos
+{% endblock h1_header %}
+
+{% block sub_info_title %}
+Listado de Vehículos
+{% endblock sub_info_title %}
+
+{% block sub_info_info %}
+<div class="container mt-4">
+    <div class="row">
         {% for vehiculo in vehiculos %}
-            <li>
-                <strong>Marca:</strong> {{ vehiculo.marca }}<br>
-                <strong>Modelo:</strong> {{ vehiculo.modelo }}<br>
-                <strong>Combustible:</strong> {{ vehiculo.combustible }}<br>
-                <strong>Año de fabricación:</strong> {{ vehiculo.ano_fabricacion }}
-            </li>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h5>
+                    <p class="card-text"><strong>Combustible:</strong> {{ vehiculo.combustible }}</p>
+                    <p class="card-text"><strong>Año de fabricación:</strong> {{ vehiculo.ano_fabricacion }}</p>
+                </div>
+            </div>
+        </div>
         {% endfor %}
-    </ul>
-</body>
-</html>
+    </div>
+</div>
+{% endblock sub_info_info %}
