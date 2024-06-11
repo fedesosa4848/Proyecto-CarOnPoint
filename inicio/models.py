@@ -10,7 +10,7 @@ class Vehiculo(models.Model):
     ano_fabricacion = models.PositiveIntegerField()
 
     def __str__(self):
-        return f"{self.marca} {self.modelo}"
+        return f"Marca: {self.marca}, Modelo: {self.modelo}, Combustible: {self.combustible}, Año de fabricación: {self.ano_fabricacion}"
 
     def clean(self):
         super().clean()
