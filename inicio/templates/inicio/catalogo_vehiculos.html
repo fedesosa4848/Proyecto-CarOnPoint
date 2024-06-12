@@ -27,5 +27,18 @@ Listado de Vehículos
         </div>
         {% endfor %}
     </div>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <form method="post" action="{% url 'buscar_vehiculo' %}">
+                    {% csrf_token %}
+                    <label for="marca">Marca del Vehículo:</label>
+                    <input type="text" id="marca" name="marca">
+                    <button type="submit" class="btn btn-primary">Buscar Vehículo</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
 </div>
 {% endblock sub_info_info %}

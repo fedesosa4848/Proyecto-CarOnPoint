@@ -1,0 +1,19 @@
+{% extends "inicio/index_logueado.html" %}
+
+
+{% block h1_header %}
+<h1>Resultados de la búsqueda</h1>
+    {% if clientes_encontrados %}
+        <p>Se encontraron los siguientes clientes:</p>
+        <ul>
+            {% for cliente in clientes_encontrados %}
+                <li>{{ cliente.nombre }} {{ cliente.apellido }}</li>
+                <!-- Aquí puedes agregar más información del cliente si lo deseas -->
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No se encontraron clientes con ese nombre.</p>
+    {% endif %}
+{% endblock h1_header %}
+
+

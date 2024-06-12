@@ -38,15 +38,23 @@
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> 
             <div class="container px-5">
-                <a class="navbar-brand" href="#!">{{ date_time|date:"d M Y H:i" }}</a>
+                <a class="navbar-brand" href="{% url 'inicio' %}">{{ date_time|date:"d M Y H:i" }}</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        
+                        
+                        {% block acciones %}
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'inicio' %}">Inicio</a></li>
+                        {% endblock acciones %}
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'catalogo-vehiculos' %}">Catalogo</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'crear' %}">Publicar</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Comprar</a></li>
-                        <li class="nav-item"><a class="nav-link" href=" {% url "about-us" %} ">About Us</a></li>
+                        {% if request.session.cliente_id %}
+                        <!-- La sesión del cliente está activa -->
+                        <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                        {% endif %}
+                    
                     </ul>
                 </div>
             </div>
@@ -63,7 +71,7 @@
                             </h1>
                             <p class="lead mb-4">
                                 {% block about_this_page %}
-                                Introduccion
+                                
                                 {% endblock about_this_page %}
                             </p>
                         </div>

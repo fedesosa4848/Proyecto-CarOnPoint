@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title_head %}
+Lista de Clientes
+{% endblock title_head %}
+
+{% block h1_header %}
+Lista de Clientes
+{% endblock h1_header %}
+
+{% block sub_info_info %}
+    <ul>
+    {% for cliente in clientes %}
+        <li>{{ cliente.nombre }} {{ cliente.apellido }} - Edad: {{ cliente.edad }}</li>
+    {% endfor %}
+    </ul>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <form method="post" action="{% url 'buscar_cliente' %}">
+                    {% csrf_token %}
+                    <label for="nombre_cliente">Nombre del Cliente:</label>
+                    <input type="text" id="nombre_cliente" name="nombre_cliente">
+                    <button type="submit" class="btn btn-primary">Buscar Cliente</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock sub_info_info %}

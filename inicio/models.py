@@ -2,6 +2,7 @@ from django.db import models
 
 from django.db import models
 from django.core.exceptions import ValidationError
+import re
 
 class Vehiculo(models.Model):
     marca = models.CharField(max_length=20)
@@ -19,7 +20,6 @@ class Vehiculo(models.Model):
         if ano_fabricacion_entero < 1980:
             raise ValidationError('El año de fabricación debe ser posterior a 1980.')
 
-from django.db import models
 
 class Domicilio(models.Model):
     calle = models.CharField(max_length=100)
@@ -36,9 +36,18 @@ class Cliente(models.Model):
     apellido = models.CharField(max_length=20)
     edad = models.PositiveIntegerField()
     domicilio = models.ForeignKey(Domicilio, on_delete=models.CASCADE)
+    contraseña = models.CharField(max_length=100, default='')  # Valor predeterminado como una cadena vacía
+    activo = models.BooleanField(default=False)
+
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}, Edad: {self.edad}, Domicilio: {self.domicilio}"
+
+    def clean(self):
+        super().clean()
+        print("Contraseña ingresada:", self.contraseña)  # Imprimir el valor de la contraseña
+        if len(self.contraseña) < 8 or not re.search(r'\d', self.contraseña) or not re.search(r'[A-Za-z]', self.contraseña):
+            raise ValidationError('La contraseña debe tener al menos 8 caracteres, incluyendo letras y números.')
 
 
 
