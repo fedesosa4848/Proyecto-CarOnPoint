@@ -57,6 +57,10 @@ def catalogo_vehiculos(request):
     vehiculos = Vehiculo.objects.all()
     return render(request, 'inicio/catalogo_vehiculos.html', {'vehiculos': vehiculos})
 
+def catalogo_vehiculos_logged(request):
+    vehiculos = Vehiculo.objects.all()
+    return render(request, 'inicio/catalogo_logged.html', {'vehiculos': vehiculos})
+
 
 def crear_cliente(request):
     if request.method == 'POST':

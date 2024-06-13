@@ -7,3 +7,10 @@ Solicitud Denegada
 {% block h1_header %}
 El vehiculo ya se encontraba en la base de datos
 {% endblock h1_header %}
+
+{% block acciones %}
+<li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'inicio_logueado' %}">Inicio</a></li>
+<li class="nav-item"><a class="nav-link" href="{% url 'crear' %}">Publicar</a></li>
+<li class="nav-item"><a class="nav-link" href="#!">Comprar</a></li>
+<li class="nav-item"><a class="nav-link" href="{% url 'ver_clientes' %}">Clientes</a></li>
+{% endblock acciones %}

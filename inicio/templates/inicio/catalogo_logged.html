@@ -1,0 +1,48 @@
+{% extends "inicio/index_logueado.html" %}
+
+{% block title_head %}
+Catálogo de Vehículos
+{% endblock title_head %}
+
+{% block h1_header %}
+Catálogo de Vehículos
+{% endblock h1_header %}
+
+{% block sub_info_title %}
+Listado de Vehículos
+{% endblock sub_info_title %}
+
+{% block sub_info_info %}
+<div class="container mt-4">
+    <div class="row">
+        {% for vehiculo in vehiculos %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h5>
+                    <p class="card-text"><strong>Combustible:</strong> {{ vehiculo.combustible }}</p>
+                    <p class="card-text"><strong>Año de fabricación:</strong> {{ vehiculo.ano_fabricacion }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <form method="post" action="{% url 'buscar_vehiculo' %}">
+                    {% csrf_token %}
+                    <label for="marca">Marca del Vehículo:</label>
+                    <input type="text" id="marca" name="marca">
+                    <button type="submit" class="btn btn-primary">Buscar Vehículo</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</div>
+{% endblock sub_info_info %}
+
+
+
+

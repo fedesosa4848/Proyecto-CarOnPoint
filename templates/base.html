@@ -46,8 +46,8 @@
                         
                         {% block acciones %}
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'inicio' %}">Inicio</a></li>
-                        {% endblock acciones %}
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'catalogo-vehiculos' %}">Catalogo</a></li>
+                        {% endblock acciones %}
                         {% if request.session.cliente_id %}
                         <!-- La sesión del cliente está activa -->
                         <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
