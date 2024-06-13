@@ -34,24 +34,24 @@ def crear_auto_v2(request):
         combustible = request.POST.get('combustible')
         ano_fabricacion = request.POST.get('ano_fabricacion')
 
-        
-        if marca and modelo:  # Verifica que se hayan proporcionado valores para la marca y el modelo
+        if marca and modelo:
             if Vehiculo.objects.filter(marca=marca, modelo=modelo).exists():
-                # Si el vehículo ya existe en la base de datos, redirige a una página de error
                 return render(request, 'inicio/vehiculo_ya_existe.html')
-            else:               
+            else:
                 try:
-                    auto = Vehiculo(marca=marca, modelo=modelo, combustible=combustible, ano_fabricacion=ano_fabricacion)
-                    auto.clean()  # Esto activará la validación definida en el modelo
+                    auto = Vehiculo(
+                        marca=marca,
+                        modelo=modelo,
+                        combustible=combustible,
+                        ano_fabricacion=ano_fabricacion
+                    )
+                    auto.clean()
                     auto.save()
                     return render(request, 'inicio/creacion_exitosa.html', {'auto': auto})
                 except ValidationError as e:
-                    error_message = e.message
-                    return render(request, 'inicio/error.html', {'error_message': error_message})
+                    return render(request, 'inicio/error.html', {'error_message': e.messages})
     else:
-        # Si la solicitud no es POST, simplemente renderiza la página de creación
         return render(request, 'inicio/creacion_v2.html')
-
 
 def catalogo_vehiculos(request):
     vehiculos = Vehiculo.objects.all()
@@ -174,16 +174,22 @@ def buscar_vehiculo(request):
         form = BuscarVehiculoForm()
     return render(request, 'inicio/resultado_busqueda_vehiculo', {'form': form})
 
+def eliminar_auto(request):
+    if request.method == 'POST':
+        marca = request.POST.get('marca')
+        modelo = request.POST.get('modelo')
+        
+        # Mensajes de depuración
+        print(f"Marca recibida: {marca}")
+        print(f"Modelo recibido: {modelo}")
+        
+        try:
+            vehiculo = Vehiculo.objects.get(marca__iexact=marca, modelo__iexact=modelo)
+            print(f"Vehículo encontrado: {vehiculo}")
+            vehiculo.delete()
+            return redirect('catalogo_vehiculos_logged')
+        except Vehiculo.DoesNotExist:
+            print("Vehículo no encontrado")
+            return render(request, 'inicio/resultado_busqueda_vehiculo.html', {'error': 'Vehículo no encontrado'})
 
-def eliminar_auto(request, id):
-    try:
-        auto = Vehiculo.objects.get(id=id)
-    except Vehiculo.DoesNotExist:
-        # Si el auto no se encuentra, renderizamos el template para auto no encontrado
-        return render(request, 'inicio/resultado_auto_no_encontrado.html')
-    
-    # Si el auto existe, lo eliminamos
-    auto.delete()
-    
-    # Después de eliminar el auto, redirigimos al catálogo de vehículos
-    return redirect('catalogo_vehiculos')
+    return redirect('catalogo_vehiculos_logged')

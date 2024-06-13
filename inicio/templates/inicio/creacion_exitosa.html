@@ -9,13 +9,20 @@ Auto Creado
 {% endblock h1_header %}
 
 {% block about_this_page %}
-<p>Marca: {{ auto.marca }}</p>
-<p>Modelo: {{ auto.modelo }}</p>
+<div class="container mt-4">
+    <h2>Vehículo Creado Exitosamente</h2>
+    <p>Marca: {{ auto.marca }}</p>
+    <p>Modelo: {{ auto.modelo }}</p>
+    <p>Combustible: {{ auto.combustible }}</p>
+    <p>Año de Fabricación: {{ auto.ano_fabricacion }}</p>
+</div>
 {% endblock about_this_page %}
 
 {% block acciones %}
 <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'inicio_logueado' %}">Inicio</a></li>
+<li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'catalogo_vehiculos_logged' %}">Catalogo</a></li>
 <li class="nav-item"><a class="nav-link" href="{% url 'crear' %}">Publicar</a></li>
 <li class="nav-item"><a class="nav-link" href="#!">Comprar</a></li>
 <li class="nav-item"><a class="nav-link" href="{% url 'ver_clientes' %}">Clientes</a></li>
+
 {% endblock acciones %}

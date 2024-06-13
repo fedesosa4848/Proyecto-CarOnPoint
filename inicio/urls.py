@@ -17,6 +17,7 @@ urlpatterns = [
     path('catalogo-vehiculos', views.catalogo_vehiculos, name='catalogo-vehiculos'),
     path('catalogo_vehiculos_logged', views.catalogo_vehiculos_logged, name= 'catalogo_vehiculos_logged'),
     path('buscar_vehiculo/', views.buscar_vehiculo, name='buscar_vehiculo'),
+    path('eliminar_vehiculo/', views.eliminar_auto, name='eliminar_vehiculo'),
     path('ver-clientes/', views.ver_clientes, name='ver_clientes'),
     path('buscar-cliente/', views.buscar_cliente, name='buscar_cliente'),
 ]

@@ -10,24 +10,25 @@ Publica tu vehiculo
 
 {% block sub_info_info %}
 
-<form action= {% url "crear" %} method="POST">
-    {% csrf_token %}
-    <p>
-        <input type="text" name="marca" placeholder=Marca>
-    </p>
-    <p>
-        <input type="text" name="modelo" placeholder=Modelo>
-    </p>
-    <p>
-        <input type="text" name="combustible" placeholder=Combustible>
-    </p>
-    <p>
-        <input type="text" name="ano_fabricacion" placeholder= Año>
-    </p>    
-    <input type="submit"  value="Enviar">
-
-</form>
-
+<div class="container mt-4">
+    <h2>Crear Vehículo</h2>
+    <form action="{% url 'crear' %}" method="POST">
+        {% csrf_token %}
+        <p>
+            <input type="text" name="marca" placeholder="Marca" required>
+        </p>
+        <p>
+            <input type="text" name="modelo" placeholder="Modelo" required>
+        </p>
+        <p>
+            <input type="text" name="combustible" placeholder="Combustible" required>
+        </p>
+        <p>
+            <input type="number" name="ano_fabricacion" placeholder="Año de Fabricación" required>
+        </p>    
+        <input type="submit" value="Enviar">
+    </form>
+</div>
 {% endblock sub_info_info %}
 
 
@@ -35,3 +36,13 @@ Publica tu vehiculo
 {% block sub_info_title %}Datos del Vehiculo{% endblock sub_info_title %}
 
 {% block about_this_page %}{% endblock about_this_page %}
+
+
+{% block acciones %}
+<li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'inicio_logueado' %}">Inicio</a></li>
+<li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'catalogo_vehiculos_logged' %}">Catalogo</a></li>
+<li class="nav-item"><a class="nav-link" href="{% url 'crear' %}">Publicar</a></li>
+<li class="nav-item"><a class="nav-link" href="#!">Comprar</a></li>
+<li class="nav-item"><a class="nav-link" href="{% url 'ver_clientes' %}">Clientes</a></li>
+
+{% endblock acciones %}
