@@ -1,0 +1,43 @@
+{% extends "inicio/index.html" %}
+
+{% block title_head %}
+Resultados de la Búsqueda de Vehículos
+{% endblock title_head %}
+
+{% block h1_header %}
+Resultados de la Búsqueda
+{% endblock h1_header %}
+
+{% block sub_info_info %}
+<div class="container mt-4">
+    <form method="get" action="{% url 'buscar_vehiculo' %}">
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+    <hr>
+    {% if vehiculos_encontrados %}
+        <div class="alert alert-success" role="alert">
+            Se encontraron los siguientes vehículos:
+        </div>
+        <div class="row">
+            {% for vehiculo in vehiculos_encontrados %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h5>
+                            <p class="card-text">
+                                <strong>Combustible:</strong> {{ vehiculo.combustible }}<br>
+                                <strong>Año de Fabricación:</strong> {{ vehiculo.ano_fabricacion }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+            No se encontraron vehículos con esos criterios.
+        </div>
+    {% endif %}
+</div>
+{% endblock sub_info_info %}

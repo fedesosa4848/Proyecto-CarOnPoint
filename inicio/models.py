@@ -10,44 +10,28 @@ class Vehiculo(models.Model):
     combustible = models.CharField(max_length=20)
     ano_fabricacion = models.PositiveIntegerField()
 
+    class Meta:
+        abstract = True
+
     def __str__(self):
         return f"Marca: {self.marca.title()}, Modelo: {self.modelo.title()}, Combustible: {self.combustible.title()}, Año de fabricación: {self.ano_fabricacion}"
 
     def clean(self):
         super().clean()
-        # Convierte ano_fabricacion a entero antes de la comparación
         ano_fabricacion_entero = int(self.ano_fabricacion)
         if ano_fabricacion_entero < 1980:
             raise ValidationError('El año de fabricación debe ser posterior a 1980.')
 
+class Auto(Vehiculo):
+    numero_puertas = models.PositiveIntegerField()
 
-class Domicilio(models.Model):
-    calle = models.CharField(max_length=100)
-    numero = models.CharField(max_length=10)
-    ciudad = models.CharField(max_length=50)
-    provincia = models.CharField(max_length=50)
-    pais = models.CharField(max_length=50)
+class Moto(Vehiculo):
+    tipo_manillar = models.CharField(max_length=20)
 
-    def __str__(self):
-        return f"{self.calle} {self.numero}, {self.ciudad}, {self.provincia}, {self.pais}"
+class Camion(Vehiculo):
+    capacidad_carga = models.PositiveIntegerField()
 
-class Cliente(models.Model):
-    nombre = models.CharField(max_length=20)
-    apellido = models.CharField(max_length=20)
-    edad = models.PositiveIntegerField()
-    domicilio = models.ForeignKey(Domicilio, on_delete=models.CASCADE)
-    contraseña = models.CharField(max_length=100, default='')  # Valor predeterminado como una cadena vacía
-    activo = models.BooleanField(default=False)
-
-
-    def __str__(self):
-        return f"{self.nombre} {self.apellido}, Edad: {self.edad}, Domicilio: {self.domicilio}"
-
-    def clean(self):
-        super().clean()
-        print("Contraseña ingresada:", self.contraseña)  # Imprimir el valor de la contraseña
-        if len(self.contraseña) < 8 or not re.search(r'\d', self.contraseña) or not re.search(r'[A-Za-z]', self.contraseña):
-            raise ValidationError('La contraseña debe tener al menos 8 caracteres, incluyendo letras y números.')
-
+class Camioneta(Vehiculo):
+    capacidad_pasajeros = models.PositiveIntegerField()
 
 

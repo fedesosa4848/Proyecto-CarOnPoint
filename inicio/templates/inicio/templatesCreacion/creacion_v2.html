@@ -1,0 +1,33 @@
+{% extends "inicio/index.html" %}
+
+{% block title_head %}
+Publicar
+{% endblock title_head %}   
+
+{% block h1_header %}
+Publica tu vehículo
+{% endblock h1_header %}
+
+{% block sub_info_info %}
+<div class="container mt-4">
+    <h2>Seleccionar Tipo de Vehículo</h2>
+    <div class="row">
+        <div class="col-md-3">
+            <a href="{% url 'crear_auto' %}" class="btn btn-outline-primary btn-block">Crear Auto</a>
+        </div>
+        <div class="col-md-3">
+            <a href="{% url 'crear_moto' %}" class="btn btn-outline-primary btn-block">Crear Moto</a>
+        </div>
+        <div class="col-md-3">
+            <a href="{% url 'crear_camion' %}" class="btn btn-outline-primary btn-block">Crear Camión</a>
+        </div>
+        <div class="col-md-3">
+            <a href="{% url 'crear_camioneta' %}" class="btn btn-outline-primary btn-block">Crear Camioneta</a>
+        </div>
+    </div>
+</div>
+{% endblock sub_info_info %}
+
+{% block sub_info_title %}Datos del Vehículo{% endblock sub_info_title %}
+
+{% block about_this_page %}{% endblock about_this_page %}

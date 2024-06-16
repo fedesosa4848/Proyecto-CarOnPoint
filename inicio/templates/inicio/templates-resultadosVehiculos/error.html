@@ -1,23 +1,23 @@
-{% extends "base.html" %}
-{% load static %}
+{% extends "inicio/index.html" %}
+
 {% block title_head %}
-Inicio
+ERROR!!
 {% endblock title_head %}
 
-{% block background_image %}
-{% static 'imagenes/background-inicio.jpg' %}
-{% endblock background_image %}
-
-
 {% block h1_header %}
-¡Bienvenido a CarOnPoint {{ cliente.nombre }} {{ cliente.apellido }}!
+{{ error_message }}
 {% endblock h1_header %}
+
+{% block sub_info_info %}
+<div class="container mt-4">
+    <p>Ocurrió un error inesperado. Por favor, intenta nuevamente más tarde.</p>
+</div>
+{% endblock sub_info_info %}
 
 {% block acciones %}
 <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'inicio_logueado' %}">Inicio</a></li>
-<li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'catalogo_vehiculos_logged' %}">Catalogo</a></li>
+<li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'catalogo_vehiculos_logged' %}">Catálogo</a></li>
 <li class="nav-item"><a class="nav-link" href="{% url 'crear' %}">Publicar</a></li>
 <li class="nav-item"><a class="nav-link" href="#!">Comprar</a></li>
 <li class="nav-item"><a class="nav-link" href="{% url 'ver_clientes' %}">Clientes</a></li>
-
 {% endblock acciones %}

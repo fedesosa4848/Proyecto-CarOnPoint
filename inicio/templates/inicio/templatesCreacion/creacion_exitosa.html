@@ -1,0 +1,27 @@
+{% extends "inicio/index.html" %}
+
+{% block title_head %}
+Solicitud Exitosa
+{% endblock title_head %}   
+
+{% block h1_header %}
+{% if tipo == 'auto' %}
+Auto Creado Exitosamente
+{% elif tipo == 'moto' %}
+Moto Creada Exitosamente
+{% elif tipo == 'camion' %}
+Camión Creado Exitosamente
+{% elif tipo == 'camioneta' %}
+Camioneta Creada Exitosamente
+{% endif %}
+{% endblock h1_header %}
+
+{% block about_this_page %}
+<div class="container mt-4">
+    <h2>Vehículo Creado Exitosamente</h2>
+    <p>Marca: {{ vehiculo.marca }}</p>
+    <p>Modelo: {{ vehiculo.modelo }}</p>
+    <p>Combustible: {{ vehiculo.combustible }}</p>
+    <p>Año de Fabricación: {{ vehiculo.ano_fabricacion }}</p>
+</div>
+{% endblock about_this_page %}

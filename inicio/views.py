@@ -1,13 +1,9 @@
 from django.shortcuts import render,redirect
-from .forms import CrearFormularioCliente, CrearFormularioDomicilio, BuscarClienteForm, BuscarVehiculoForm
-from inicio.models import Vehiculo,Cliente
+from inicio.models import Vehiculo,Moto,Auto,Camion,Camioneta
 from django.core.exceptions import ValidationError
-from django.contrib.auth.hashers import check_password
-from .decorators import cliente_activo
-from django.contrib import messages
-from django.contrib.auth import authenticate, login
-from .forms import LoginForm
-
+from .forms import FormularioAuto, FormularioMoto, FormularioCamion, FormularioCamioneta,BuscarVehiculoForm
+from django.shortcuts import render, redirect
+from django.http import Http404
 
 
 #vista
@@ -18,161 +14,114 @@ def inicio(request):
 def about_me(request):
     return render(request, 'about_us.html')
 
-def inicio_logueado(request):
-    cliente_id = request.session.get('cliente_id')
-    if cliente_id:
-        cliente = Cliente.objects.get(id=cliente_id)
-        return render(request, 'inicio/index_logueado.html', {'cliente': cliente})
-    else:
-        return redirect('login')  # Redirigir al login si no hay cliente en la sesión
 
+# Vista para seleccionar el tipo de vehículo a crear
+def seleccionar_tipo_vehiculo(request):
+    return render(request, 'inicio/templatesCreacion/creacion_v2.html')
 
-def crear_auto_v2(request):
+# Vista general para crear vehículos
+def crear_vehiculo(request, formulario_class, template_name):
     if request.method == 'POST':
-        marca = request.POST.get('marca')
-        modelo = request.POST.get('modelo')
-        combustible = request.POST.get('combustible')
-        ano_fabricacion = request.POST.get('ano_fabricacion')
-
-        if marca and modelo:
-            if Vehiculo.objects.filter(marca=marca, modelo=modelo).exists():
-                return render(request, 'inicio/vehiculo_ya_existe.html')
+        formulario = formulario_class(request.POST)
+        if formulario.is_valid():
+            datos_vehiculo = formulario.cleaned_data
+            modelo = formulario_class.Meta.model
+            if modelo.objects.filter(marca=datos_vehiculo.get('marca'), modelo=datos_vehiculo.get('modelo')).exists():
+                return render(request, 'inicio/templates-resultadosVehiculos/vehiculo_ya_existe.html')
             else:
                 try:
-                    auto = Vehiculo(
-                        marca=marca,
-                        modelo=modelo,
-                        combustible=combustible,
-                        ano_fabricacion=ano_fabricacion
-                    )
-                    auto.clean()
-                    auto.save()
-                    return render(request, 'inicio/creacion_exitosa.html', {'auto': auto})
+                    vehiculo = formulario.save(commit=False)
+                    vehiculo.full_clean()  # Ejecuta las validaciones del modelo
+                    vehiculo.save()
+                    return redirect('creacion_exitosa', vehiculo.id, modelo.__name__.lower())
                 except ValidationError as e:
-                    return render(request, 'inicio/error.html', {'error_message': e.messages})
+                    formulario.add_error(None, e.message)  # Añadir error no relacionado a un campo específico
+        # Si el formulario no es válido, renderiza el formulario con los errores
+        return render(request, template_name, {'formulario': formulario})
     else:
-        return render(request, 'inicio/creacion_v2.html')
+        formulario = formulario_class()
+    return render(request, template_name, {'formulario': formulario})
+
+# Vistas específicas para cada tipo de vehículo
+def crear_auto(request):
+    return crear_vehiculo(request, FormularioAuto, 'inicio/templatesVehiculos/crear_auto.html')
+
+def crear_moto(request):
+    return crear_vehiculo(request, FormularioMoto, 'inicio/templatesVehiculos/crear_moto.html')
+
+def crear_camion(request):
+    return crear_vehiculo(request, FormularioCamion, 'inicio/templatesVehiculos/crear_camion.html')
+
+def crear_camioneta(request):
+    return crear_vehiculo(request, FormularioCamioneta, 'inicio/templatesVehiculos/crear_camioneta.html')
+
+def creacion_exitosa(request, vehiculo_id, tipo):
+    try:
+        if tipo == 'auto':
+            vehiculo = Auto.objects.get(id=vehiculo_id)
+        elif tipo == 'moto':
+            vehiculo = Moto.objects.get(id=vehiculo_id)
+        elif tipo == 'camion':
+            vehiculo = Camion.objects.get(id=vehiculo_id)
+        elif tipo == 'camioneta':
+            vehiculo = Camioneta.objects.get(id=vehiculo_id)
+        else:
+            return render(request, 'inicio/templates-ResultadosVehiculo/error.html', {'mensaje': 'Tipo de vehículo no válido.'})
+
+        return render(request, 'inicio/templatesCreacion/creacion_exitosa.html', {'vehiculo': vehiculo, 'tipo': tipo})
+    except (Auto.DoesNotExist, Moto.DoesNotExist, Camion.DoesNotExist, Camioneta.DoesNotExist):
+        raise Http404("El vehículo solicitado no existe en la base de datos.")
 
 def catalogo_vehiculos(request):
-    vehiculos = Vehiculo.objects.all()
-    return render(request, 'inicio/catalogo_vehiculos.html', {'vehiculos': vehiculos})
-
-def catalogo_vehiculos_logged(request):
-    vehiculos = Vehiculo.objects.all()
-    return render(request, 'inicio/catalogo_logged.html', {'vehiculos': vehiculos})
-
-
-def crear_cliente(request):
-    if request.method == 'POST':
-        cliente_form = CrearFormularioCliente(request.POST)
-        domicilio_form = CrearFormularioDomicilio(request.POST)
-        if cliente_form.is_valid() and domicilio_form.is_valid():
-            domicilio = domicilio_form.save()
-            cliente = cliente_form.save(commit=False)
-            cliente.domicilio = domicilio
-            try:
-                cliente.clean()
-                cliente.save()
-                # Guardar el cliente_id en la sesión
-                request.session['cliente_id'] = cliente.id
-                return redirect('inicio_logueado')  # Redirige a alguna vista después de crear el cliente
-            except ValidationError as e:
-                print("Error en la validación de cliente:", e.message)
-                cliente_form.add_error('contraseña', e.message)  # Agregar error específico para la contraseña
-                print("Formulario de cliente válido después de agregar error:", cliente_form.is_valid())
-                cliente_form.is_valid()  # Validar explícitamente el formulario después de agregar el error
-                print("Formulario de cliente válido después de validar explícitamente:", cliente_form.is_valid())
-        else:
-            # Retener los datos ingresados por el usuario en los campos válidos
-            cliente_form.fields['nombre'].initial = request.POST.get('nombre')
-            cliente_form.fields['apellido'].initial = request.POST.get('apellido')
-            cliente_form.fields['edad'].initial = request.POST.get('edad')
-            domicilio_form.fields['calle'].initial = request.POST.get('calle')
-            domicilio_form.fields['numero'].initial = request.POST.get('numero')
-            domicilio_form.fields['ciudad'].initial = request.POST.get('ciudad')
-            domicilio_form.fields['provincia'].initial = request.POST.get('provincia')
-            domicilio_form.fields['pais'].initial = request.POST.get('pais')
-    else:
-        cliente_form = CrearFormularioCliente()
-        domicilio_form = CrearFormularioDomicilio()
-    return render(request, 'crear_cliente.html', {'cliente_form': cliente_form, 'domicilio_form': domicilio_form})
+    autos = Auto.objects.all()
+    motos = Moto.objects.all()
+    camiones = Camion.objects.all()
+    camionetas = Camioneta.objects.all()
+    return render(request, 'inicio/templatesCreacion/catalogo_vehiculos.html', {
+        'autos': autos,
+        'motos': motos,
+        'camiones': camiones,
+        'camionetas': camionetas
+    })
 
 
 
-from django.contrib.auth.hashers import check_password
-def login_view(request):
-    if request.method == 'POST':
-        print("Solicitud POST recibida")
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            nombre_cliente = form.cleaned_data['nombre_cliente']
-            contraseña = form.cleaned_data['contraseña']
-
-            # Mensajes de depuración
-            print("Nombre del cliente recibido en el formulario:", nombre_cliente)
-            print("Contraseña recibida en el formulario:", contraseña)
-
-            try:
-                cliente = Cliente.objects.get(nombre=nombre_cliente)
-
-                # Mensaje de depuración
-                print("Cliente encontrado en la base de datos:", cliente)
-
-                if check_password(contraseña, cliente.contraseña):
-                    # Contraseña correcta, establece la sesión del cliente
-                    request.session['cliente_id'] = cliente.id
-                    messages.success(request, 'Inicio de sesión exitoso.')
-                    return redirect('inicio_logueado')
-                else:
-                    # Contraseña incorrecta
-                    form.add_error('contraseña', 'Contraseña incorrecta')
-            except Cliente.DoesNotExist:
-                # Cliente no encontrado
-                form.add_error('nombre_cliente', 'Cliente no encontrado')
-    else:
-        print("Solicitud GET recibida")
-        form = LoginForm()
-        
-    print("Renderizando la plantilla 'login.html'")
-    return render(request, 'login.html', {'form': form})
-
-
-
-def logout_view(request):
-    if 'cliente_id' in request.session:
-        del request.session['cliente_id']
-        print("La sesión del cliente se ha eliminado correctamente.")
-    else:
-        print("La sesión del cliente no existe o ya ha sido eliminada.")
-    return redirect('inicio')
-
-
-
-def ver_clientes(request):
-    clientes = Cliente.objects.all()
-    return render(request, 'inicio/ver_clientes.html', {'clientes': clientes})
-
-def buscar_cliente(request):
-    if request.method == 'POST':
-        form = BuscarClienteForm(request.POST)
-        if form.is_valid():
-            nombre_cliente = form.cleaned_data['nombre_cliente']
-            clientes_encontrados = Cliente.objects.filter(nombre__icontains=nombre_cliente)
-            return render(request, 'inicio/resultado_busqueda.html', {'clientes_encontrados': clientes_encontrados})
-    else:
-        form = BuscarClienteForm()
-    return render(request, 'inicio/resultado_busqueda.html', {'form': form})
 
 def buscar_vehiculo(request):
-    if request.method == 'POST':
-        form = BuscarVehiculoForm(request.POST)
-        if form.is_valid():
-            marca = form.cleaned_data['marca']
-            vehiculos_encontrados = Vehiculo.objects.filter(marca__icontains=marca)
-            return render(request, 'inicio/resultado_busqueda_vehiculo.html', {'vehiculos_encontrados': vehiculos_encontrados})
-    else:
-        form = BuscarVehiculoForm()
-    return render(request, 'inicio/resultado_busqueda_vehiculo', {'form': form})
+    form = BuscarVehiculoForm(request.GET or None)
+    vehiculos_encontrados = []
+
+    if request.method == 'GET' and form.is_valid():
+        # Obtener los datos del formulario
+        marca = form.cleaned_data.get('marca')
+        modelo = form.cleaned_data.get('modelo')
+        combustible = form.cleaned_data.get('combustible')
+        ano_fabricacion = form.cleaned_data.get('ano_fabricacion')
+
+        # Crear un diccionario de filtros
+        filtros = {}
+
+        # Agregar filtros si los campos están completos
+        if marca:
+            filtros['marca__icontains'] = marca
+        if modelo:
+            filtros['modelo__icontains'] = modelo
+        if combustible:
+            filtros['combustible__icontains'] = combustible
+        if ano_fabricacion:
+            filtros['ano_fabricacion'] = ano_fabricacion
+
+        # Filtrar sobre las subclases concretas solo si hay filtros aplicados
+        if filtros:
+            autos = Auto.objects.filter(**filtros)
+            motos = Moto.objects.filter(**filtros)
+            camiones = Camion.objects.filter(**filtros)
+            camionetas = Camioneta.objects.filter(**filtros)
+
+            vehiculos_encontrados = list(autos) + list(motos) + list(camiones) + list(camionetas)
+
+    return render(request, 'inicio/templates-resultadosVehiculos/resultado_busqueda_vehiculo.html', {'form': form, 'vehiculos_encontrados': vehiculos_encontrados})
+
 
 def eliminar_auto(request):
     if request.method == 'POST':
