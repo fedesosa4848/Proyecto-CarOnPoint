@@ -23,11 +23,12 @@ def log(request):
     return render(request, 'login.html', {'formulario': formulario})
 
 def registro(request):
-    
     if request.method == 'POST':
-        formulario = MiFormulario()
-        if formulario.is_valid:
+        formulario = MiFormulario(request.POST)
+        if formulario.is_valid():
             formulario.save()
-            return redirect ('inicio')
-        
-    return render(request, 'users/registro.html',{'formulario' : formulario} )
+            return redirect('inicio')
+    else:
+        formulario = MiFormulario()
+
+    return render(request, 'registro.html', {'formulario': formulario})

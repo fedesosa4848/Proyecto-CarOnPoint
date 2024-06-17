@@ -19,6 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('inicio.urls')),
-    path('users/', include('users.urls')),  # Aquí agregamos la coma y una barra '/' al final de 'users'
+    path('',include('inicio.urls')),
+    path('users/', include('users.urls')),
 ]

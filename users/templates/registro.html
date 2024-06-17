@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title_head %}
+Sign In
+{% endblock title_head %}
+
+{% block h1_header %}
+Sign In
+{% endblock h1_header %}
+
+{% block about_this_page %}
+Ingresa tus datos y conviertete en parte de esta gran comunidad de CarOnPoint
+{% endblock about_this_page %}
+
+{% block sub_info_info %}
+<div class="container mt-4">
+    <form action="{% url 'SignIn' %}" method="post">
+        {% csrf_token %}
+        {% for field in formulario %}
+            <div class="mb-3">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.help_text %}
+                    <small class="text-muted">{{ field.help_text }}</small>
+                {% endif %}
+                {% if field.errors %}
+                    <div class="text-danger">
+                        {% for error in field.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Sign In</button>
+    </form>
+</div>
+{% endblock sub_info_info %}
