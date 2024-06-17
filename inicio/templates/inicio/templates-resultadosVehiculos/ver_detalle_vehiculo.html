@@ -1,0 +1,41 @@
+{% extends "inicio/index.html" %}
+
+{% block title_head %}
+Detalles del Vehículo - {{ vehiculo.marca }} {{ vehiculo.modelo }}
+{% endblock title_head %}
+
+{% block h1_header %}
+Detalles del Vehículo
+{% endblock h1_header %}
+
+
+{% block about_this_page %}
+    {% endblock about_this_page %}
+
+{% block sub_info_info %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h5>
+            <p class="card-text"><strong>Combustible:</strong> {{ vehiculo.combustible }}</p>
+            <p class="card-text"><strong>Año de fabricación:</strong> {{ vehiculo.ano_fabricacion }}</p>
+
+            {% if tipo == 'auto' %}
+            <p class="card-text"><strong>Número de Puertas:</strong> {{ vehiculo.numero_puertas }}</p>
+            {% endif %}
+
+            {% if tipo == 'moto' %}
+            <p class="card-text"><strong>Tipo de Manillar:</strong> {{ vehiculo.tipo_manillar }}</p>
+            {% endif %}
+
+            {% if tipo == 'camion' %}
+            <p class="card-text"><strong>Capacidad de Carga:</strong> {{ vehiculo.capacidad_carga }}</p>
+            {% endif %}
+
+            {% if tipo == 'camioneta' %}
+            <p class="card-text"><strong>Capacidad de Pasajeros:</strong> {{ vehiculo.capacidad_pasajeros }}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock sub_info_info %}

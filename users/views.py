@@ -2,24 +2,25 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
 from django.contrib.auth import authenticate, login
 from users.forms import MiFormulario
+
 def log(request):
-    
-    formulario = AuthenticationForm()
-    
     if request.method == 'POST':
-        formulario =AuthenticationForm(request, data = request.POST)
+        formulario = AuthenticationForm(request, data=request.POST)
         if formulario.is_valid():
-           username = formulario.cleaned_data.get('username')
-           password = formulario.changed_data.get('password')
-           
-           user = authenticate(request,username= username, password = password)
-           
-           login(request,user)
-           
-           return redirect ('inicio')
-           
+            username = formulario.cleaned_data.get('username')
+            password = formulario.cleaned_data.get('password')
+            
+            # Autenticación del usuario
+            user = authenticate(request, username=username, password=password)
+            
+            if user is not None:
+                # Iniciar sesión si la autenticación es exitosa
+                login(request, user)
+                return redirect('inicio')  # Redirigir a la página de inicio
+    else:
+        formulario = AuthenticationForm()
     
-    return render(request, 'users/login.html',{'formulario' : formulario})
+    return render(request, 'login.html', {'formulario': formulario})
 
 def registro(request):
     

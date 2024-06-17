@@ -85,7 +85,39 @@ def catalogo_vehiculos(request):
         'camionetas': camionetas
     })
 
+def catalogo_sin_login(request):
+    autos = Auto.objects.all()
+    motos = Moto.objects.all()
+    camiones = Camion.objects.all()
+    camionetas = Camioneta.objects.all()
+    return render(request, 'inicio/templates_sin_login/catalogo_sinLogin.html', {
+        'autos': autos,
+        'motos': motos,
+        'camiones': camiones,
+        'camionetas': camionetas
+    })    
 
+def ver_detalle_vehiculo(request, tipo, id):
+    # Determinar el modelo adecuado según el tipo de vehículo
+    if tipo == 'auto':
+        vehiculo = get_object_or_404(Auto, id=id)
+    elif tipo == 'moto':
+        vehiculo = get_object_or_404(Moto, id=id)
+    elif tipo == 'camion':
+        vehiculo = get_object_or_404(Camion, id=id)
+    elif tipo == 'camioneta':
+        vehiculo = get_object_or_404(Camioneta, id=id)
+    else:
+        # Manejo de error si el tipo de vehículo no es válido
+        return render(request, 'error.html', {'mensaje': 'Tipo de vehículo no válido'})
+
+    # Contexto para pasar a la plantilla
+    contexto = {
+        'vehiculo': vehiculo,
+        'tipo': tipo  # Pasamos el tipo de vehículo como contexto
+    }
+
+    return render(request, 'inicio/templates-resultadosVehiculos/ver_detalle_vehiculo.html', contexto)
 
 
 def buscar_vehiculo(request):
@@ -123,6 +155,41 @@ def buscar_vehiculo(request):
 
     return render(request, 'inicio/templates-resultadosVehiculos/resultado_busqueda_vehiculo.html', {'form': form, 'vehiculos_encontrados': vehiculos_encontrados})
 
+
+def buscar_vehiculo_sinLogin(request):
+    form = BuscarVehiculoForm(request.GET or None)
+    vehiculos_encontrados = []
+
+    if request.method == 'GET' and form.is_valid():
+        # Obtener los datos del formulario
+        marca = form.cleaned_data.get('marca')
+        modelo = form.cleaned_data.get('modelo')
+        combustible = form.cleaned_data.get('combustible')
+        ano_fabricacion = form.cleaned_data.get('ano_fabricacion')
+
+        # Crear un diccionario de filtros
+        filtros = {}
+
+        # Agregar filtros si los campos están completos
+        if marca:
+            filtros['marca__icontains'] = marca
+        if modelo:
+            filtros['modelo__icontains'] = modelo
+        if combustible:
+            filtros['combustible__icontains'] = combustible
+        if ano_fabricacion:
+            filtros['ano_fabricacion'] = ano_fabricacion
+
+        # Filtrar sobre las subclases concretas solo si hay filtros aplicados
+        if filtros:
+            autos = Auto.objects.filter(**filtros)
+            motos = Moto.objects.filter(**filtros)
+            camiones = Camion.objects.filter(**filtros)
+            camionetas = Camioneta.objects.filter(**filtros)
+
+            vehiculos_encontrados = list(autos) + list(motos) + list(camiones) + list(camionetas)
+
+    return render(request, 'inicio/templates_sin_login/resultado_busqueda_sinlogin.html', {'form': form, 'vehiculos_encontrados': vehiculos_encontrados})
 
 def eliminar_vehiculo(request, id):
     # Intenta encontrar el vehículo en cada subclase

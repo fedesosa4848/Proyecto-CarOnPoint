@@ -8,9 +8,8 @@ Catálogo de Vehículos
 Catálogo de Vehículos
 {% endblock h1_header %}
 
-
 {% block about_this_page %}
- 
+
 {% endblock about_this_page %}
 
 {% block sub_info_title %}
@@ -31,14 +30,7 @@ Listado de Vehículos
                                 <h5 class="card-title">{{ auto.marca }} {{ auto.modelo }}</h5>
                                 <p class="card-text"><strong>Combustible:</strong> {{ auto.combustible }}</p>
                                 <p class="card-text"><strong>Año de fabricación:</strong> {{ auto.ano_fabricacion }}</p>
-                                <div class="btn-group mt-3" role="group">
-                                    <form method="post" action="{% url 'eliminar_vehiculo' auto.id %}">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn btn-danger">Eliminar Auto</button>
-                                    </form>
-                                    <a href="{% url 'editar_vehiculo' 'auto' auto.id %}" class="btn btn-primary">Editar Auto</a>
-                                    <a href="{% url 'ver_detalle_vehiculo' 'auto' auto.id %}" class="btn btn-info">Ver Detalles</a>
-                                </div>
+                                <a href="{% url 'ver_detalle_vehiculo' 'auto' auto.id %}" class="btn btn-info">Ver Detalles</a>
                             </div>
                         </div>
                     </div>
@@ -60,14 +52,7 @@ Listado de Vehículos
                                 <h5 class="card-title">{{ moto.marca }} {{ moto.modelo }}</h5>
                                 <p class="card-text"><strong>Combustible:</strong> {{ moto.combustible }}</p>
                                 <p class="card-text"><strong>Año de fabricación:</strong> {{ moto.ano_fabricacion }}</p>
-                                <div class="btn-group mt-3" role="group">
-                                    <form method="post" action="{% url 'eliminar_vehiculo' moto.id %}">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn btn-danger">Eliminar Moto</button>
-                                    </form>
-                                    <a href="{% url 'editar_vehiculo' 'moto' moto.id %}" class="btn btn-primary">Editar Moto</a>
-                                    <a href="{% url 'ver_detalle_vehiculo' 'moto' moto.id %}" class="btn btn-info">Ver Detalles</a>
-                                </div>
+                                <a href="{% url 'ver_detalle_vehiculo' 'moto' moto.id %}" class="btn btn-info">Ver Detalles</a>
                             </div>
                         </div>
                     </div>
@@ -89,14 +74,7 @@ Listado de Vehículos
                                 <h5 class="card-title">{{ camion.marca }} {{ camion.modelo }}</h5>
                                 <p class="card-text"><strong>Combustible:</strong> {{ camion.combustible }}</p>
                                 <p class="card-text"><strong>Año de fabricación:</strong> {{ camion.ano_fabricacion }}</p>
-                                <div class="btn-group mt-3" role="group">
-                                    <form method="post" action="{% url 'eliminar_vehiculo' camion.id %}">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn btn-danger">Eliminar Camión</button>
-                                    </form>
-                                    <a href="{% url 'editar_vehiculo' 'camion' camion.id %}" class="btn btn-primary">Editar Camión</a>
-                                    <a href="{% url 'ver_detalle_vehiculo' 'camion' camion.id %}" class="btn btn-info">Ver Detalles</a>
-                                </div>
+                                <a href="{% url 'ver_detalle_vehiculo' 'camion' camion.id %}" class="btn btn-info">Ver Detalles</a>
                             </div>
                         </div>
                     </div>
@@ -118,14 +96,7 @@ Listado de Vehículos
                                 <h5 class="card-title">{{ camioneta.marca }} {{ camioneta.modelo }}</h5>
                                 <p class="card-text"><strong>Combustible:</strong> {{ camioneta.combustible }}</p>
                                 <p class="card-text"><strong>Año de fabricación:</strong> {{ camioneta.ano_fabricacion }}</p>
-                                <div class="btn-group mt-3" role="group">
-                                    <form method="post" action="{% url 'eliminar_vehiculo' camioneta.id %}">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn btn-danger">Eliminar Camioneta</button>
-                                    </form>
-                                    <a href="{% url 'editar_vehiculo' 'camioneta' camioneta.id %}" class="btn btn-primary">Editar Camioneta</a>
-                                    <a href="{% url 'ver_detalle_vehiculo' 'camioneta' camioneta.id %}" class="btn btn-info">Ver Detalles</a>
-                                </div>
+                                <a href="{% url 'ver_detalle_vehiculo' 'camioneta' camioneta.id %}" class="btn btn-info">Ver Detalles</a>
                             </div>
                         </div>
                     </div>
@@ -139,7 +110,7 @@ Listado de Vehículos
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-12 text-center">
-                <form method="get" action="{% url 'buscar_vehiculo' %}">
+                <form method="get" action="{% url 'buscar_vehiculo_sin_log' %}">
                     {{ form.as_p }}
                     <button type="submit" class="btn btn-primary">Buscar Vehículo</button>
                 </form>
