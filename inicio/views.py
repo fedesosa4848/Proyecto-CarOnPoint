@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from inicio.models import Moto,Auto,Camion,Camioneta
 from django.core.exceptions import ValidationError
 from .forms import FormularioAuto, FormularioMoto, FormularioCamion, FormularioCamioneta,BuscarVehiculoForm
@@ -140,43 +140,35 @@ def eliminar_vehiculo(request, id):
         vehiculo.delete()
     return redirect('catalogo-vehiculos')
 
-def editar_vehiculo(request, id):
-    modelos = {
-        'auto': Auto,
-        'moto': Moto,
-        'camion': Camion,
-        'camioneta': Camioneta,
-    }
+def editar_vehiculo(request, tipo, id):
+    # Determinar el modelo y formulario adecuado según el tipo de vehículo
+    if tipo == 'auto':
+        Vehiculo = Auto
+        Formulario = FormularioAuto
+    elif tipo == 'moto':
+        Vehiculo = Moto
+        Formulario = FormularioMoto
+    elif tipo == 'camion':
+        Vehiculo = Camion
+        Formulario = FormularioCamion
+    elif tipo == 'camioneta':
+        Vehiculo = Camioneta
+        Formulario = FormularioCamioneta
+    else:
+        # Manejo de error si el tipo de vehículo no es válido
+        return render(request, 'error.html', {'mensaje': 'Tipo de vehículo no válido'})
 
-    vehiculo = None
-    for modelo_name, modelo in modelos.items():
-        try:
-            vehiculo = modelo.objects.get(id=id)
-            form_class = get_form_class_for_model(modelo_name)
-            form = form_class(instance=vehiculo)
-            break
-        except modelo.DoesNotExist:
-            continue
-
-    if not vehiculo:
-        return render(request, 'inicio/error.html', {'error': 'Vehículo no encontrado'})
+    # Recuperar instancia del vehículo a editar
+    vehiculo = get_object_or_404(Vehiculo, id=id)
 
     if request.method == 'POST':
-        form = form_class(request.POST, instance=vehiculo)
+        # Crear una instancia del formulario y asignar datos para guardar
+        form = Formulario(request.POST, instance=vehiculo)
         if form.is_valid():
             form.save()
-            return redirect('catalogo_vehiculos')
+            return redirect('catalogo-vehiculos')  # Redirigir al catálogo después de editar
+    else:
+        # Cargar formulario inicial con datos del vehículo a editar
+        form = Formulario(instance=vehiculo)
 
     return render(request, 'inicio/editar_vehiculo.html', {'form': form, 'vehiculo': vehiculo})
-
-def get_form_class_for_model(modelo_name):
-    form_class = None
-    if modelo_name == 'auto':
-        form_class = FormularioAuto
-    elif modelo_name == 'moto':
-        form_class = FormularioMoto
-    elif modelo_name == 'camion':
-        form_class = FormularioCamion
-    elif modelo_name == 'camioneta':
-        form_class = FormularioCamioneta
-    return form_class

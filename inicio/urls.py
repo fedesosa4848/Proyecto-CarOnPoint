@@ -19,8 +19,7 @@ urlpatterns = [
     path('buscar_vehiculo/', views.buscar_vehiculo, name='buscar_vehiculo'),
     path('creacion-exitosa/<int:vehiculo_id>/<str:tipo>/', views.creacion_exitosa, name='creacion_exitosa'),
     path('vehiculos/eliminar/<int:id>/', views.eliminar_vehiculo, name='eliminar_vehiculo'),
-    path('vehiculos/eliminar/<int:id>/', views.eliminar_vehiculo, name='editar_vehiculo'),
-
+    path('editar-vehiculo/<str:tipo>/<int:id>/', views.editar_vehiculo, name='editar_vehiculo'),
 ]
 
 

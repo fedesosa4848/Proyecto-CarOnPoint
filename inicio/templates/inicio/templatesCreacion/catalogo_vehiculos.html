@@ -26,11 +26,13 @@ Listado de Vehículos
                                 <h5 class="card-title">{{ auto.marca }} {{ auto.modelo }}</h5>
                                 <p class="card-text"><strong>Combustible:</strong> {{ auto.combustible }}</p>
                                 <p class="card-text"><strong>Año de fabricación:</strong> {{ auto.ano_fabricacion }}</p>
-                                <form method="post" action="{% url 'eliminar_vehiculo' auto.id %}">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn btn-danger">Eliminar Auto</button>
-                                </form>
-                                <a href="{% url 'editar_vehiculo' auto.id %}" class="btn btn-primary">Editar Auto</a>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <form method="post" action="{% url 'eliminar_vehiculo' auto.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger mr-2">Eliminar Auto</button>
+                                    </form>
+                                    <a href="{% url 'editar_vehiculo' 'auto' auto.id %}" class="btn btn-primary">Editar Auto</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -52,11 +54,13 @@ Listado de Vehículos
                                 <h5 class="card-title">{{ moto.marca }} {{ moto.modelo }}</h5>
                                 <p class="card-text"><strong>Combustible:</strong> {{ moto.combustible }}</p>
                                 <p class="card-text"><strong>Año de fabricación:</strong> {{ moto.ano_fabricacion }}</p>
-                                <form method="post" action="{% url 'eliminar_vehiculo' moto.id %}">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn btn-danger">Eliminar Moto</button>
-                                </form>
-                                <a href="{% url 'editar_vehiculo' moto.id %}" class="btn btn-primary">Editar Moto</a>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <form method="post" action="{% url 'eliminar_vehiculo' moto.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger mr-2">Eliminar Moto</button>
+                                    </form>
+                                    <a href="{% url 'editar_vehiculo' 'moto' moto.id %}" class="btn btn-primary">Editar Moto</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -78,11 +82,13 @@ Listado de Vehículos
                                 <h5 class="card-title">{{ camion.marca }} {{ camion.modelo }}</h5>
                                 <p class="card-text"><strong>Combustible:</strong> {{ camion.combustible }}</p>
                                 <p class="card-text"><strong>Año de fabricación:</strong> {{ camion.ano_fabricacion }}</p>
-                                <form method="post" action="{% url 'eliminar_vehiculo' camion.id %}">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn btn-danger">Eliminar Camión</button>
-                                </form>
-                                <a href="{% url 'editar_vehiculo' camion.id %}" class="btn btn-primary">Editar Camión</a>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <form method="post" action="{% url 'eliminar_vehiculo' camion.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger mr-2">Eliminar Camión</button>
+                                    </form>
+                                    <a href="{% url 'editar_vehiculo' 'camion' camion.id %}" class="btn btn-primary">Editar Camión</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -104,11 +110,13 @@ Listado de Vehículos
                                 <h5 class="card-title">{{ camioneta.marca }} {{ camioneta.modelo }}</h5>
                                 <p class="card-text"><strong>Combustible:</strong> {{ camioneta.combustible }}</p>
                                 <p class="card-text"><strong>Año de fabricación:</strong> {{ camioneta.ano_fabricacion }}</p>
-                                <form method="post" action="{% url 'eliminar_vehiculo' camioneta.id %}">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn btn-danger">Eliminar Camioneta</button>
-                                </form>
-                                <a href="{% url 'editar_vehiculo' camioneta.id %}" class="btn btn-primary">Editar Camioneta</a>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <form method="post" action="{% url 'eliminar_vehiculo' camioneta.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger mr-2">Eliminar Camioneta</button>
+                                    </form>
+                                    <a href="{% url 'editar_vehiculo' 'camioneta' camioneta.id %}" class="btn btn-primary">Editar Camioneta</a>
+                                </div>
                             </div>
                         </div>
                     </div>
