@@ -29,6 +29,10 @@ Resultados de la Búsqueda
                                 <strong>Combustible:</strong> {{ vehiculo.combustible }}<br>
                                 <strong>Año de Fabricación:</strong> {{ vehiculo.ano_fabricacion }}
                             </p>
+                            <form method="post" action="{% url 'eliminar_vehiculo' vehiculo.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Eliminar Vehículo</button>
+                            </form>
                         </div>
                     </div>
                 </div>

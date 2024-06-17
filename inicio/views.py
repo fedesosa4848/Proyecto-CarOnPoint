@@ -1,9 +1,10 @@
 from django.shortcuts import render,redirect
-from inicio.models import Vehiculo,Moto,Auto,Camion,Camioneta
+from inicio.models import Moto,Auto,Camion,Camioneta
 from django.core.exceptions import ValidationError
 from .forms import FormularioAuto, FormularioMoto, FormularioCamion, FormularioCamioneta,BuscarVehiculoForm
 from django.shortcuts import render, redirect
 from django.http import Http404
+from django.urls import reverse
 
 
 #vista
@@ -123,22 +124,59 @@ def buscar_vehiculo(request):
     return render(request, 'inicio/templates-resultadosVehiculos/resultado_busqueda_vehiculo.html', {'form': form, 'vehiculos_encontrados': vehiculos_encontrados})
 
 
-def eliminar_auto(request):
-    if request.method == 'POST':
-        marca = request.POST.get('marca')
-        modelo = request.POST.get('modelo')
-        
-        # Mensajes de depuración
-        print(f"Marca recibida: {marca}")
-        print(f"Modelo recibido: {modelo}")
-        
-        try:
-            vehiculo = Vehiculo.objects.get(marca__iexact=marca, modelo__iexact=modelo)
-            print(f"Vehículo encontrado: {vehiculo}")
-            vehiculo.delete()
-            return redirect('catalogo_vehiculos_logged')
-        except Vehiculo.DoesNotExist:
-            print("Vehículo no encontrado")
-            return render(request, 'inicio/resultado_busqueda_vehiculo.html', {'error': 'Vehículo no encontrado'})
+def eliminar_vehiculo(request, id):
+    # Intenta encontrar el vehículo en cada subclase
+    modelos = [Auto, Moto, Camion, Camioneta]
+    vehiculo = None
 
-    return redirect('catalogo_vehiculos_logged')
+    for modelo in modelos:
+        try:
+            vehiculo = modelo.objects.get(id=id)
+            break
+        except modelo.DoesNotExist:
+            continue
+
+    if vehiculo:
+        vehiculo.delete()
+    return redirect('catalogo-vehiculos')
+
+def editar_vehiculo(request, id):
+    modelos = {
+        'auto': Auto,
+        'moto': Moto,
+        'camion': Camion,
+        'camioneta': Camioneta,
+    }
+
+    vehiculo = None
+    for modelo_name, modelo in modelos.items():
+        try:
+            vehiculo = modelo.objects.get(id=id)
+            form_class = get_form_class_for_model(modelo_name)
+            form = form_class(instance=vehiculo)
+            break
+        except modelo.DoesNotExist:
+            continue
+
+    if not vehiculo:
+        return render(request, 'inicio/error.html', {'error': 'Vehículo no encontrado'})
+
+    if request.method == 'POST':
+        form = form_class(request.POST, instance=vehiculo)
+        if form.is_valid():
+            form.save()
+            return redirect('catalogo_vehiculos')
+
+    return render(request, 'inicio/editar_vehiculo.html', {'form': form, 'vehiculo': vehiculo})
+
+def get_form_class_for_model(modelo_name):
+    form_class = None
+    if modelo_name == 'auto':
+        form_class = FormularioAuto
+    elif modelo_name == 'moto':
+        form_class = FormularioMoto
+    elif modelo_name == 'camion':
+        form_class = FormularioCamion
+    elif modelo_name == 'camioneta':
+        form_class = FormularioCamioneta
+    return form_class
