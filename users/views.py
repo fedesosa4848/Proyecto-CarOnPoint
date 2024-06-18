@@ -1,7 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
 from django.contrib.auth import authenticate, login
-from users.forms import MiFormulario
+from django.contrib.auth.decorators import login_required
+from users.forms import MiFormulario,EditarPerfil
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import PasswordChangeView
+from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+
 
 def log(request):
     if request.method == 'POST':
@@ -32,3 +38,23 @@ def registro(request):
         formulario = MiFormulario()
 
     return render(request, 'registro.html', {'formulario': formulario})
+
+@login_required
+def editar_perfil(request):
+    
+    formulario = EditarPerfil(instance = request.user)
+    
+    if request.method == 'POST':
+        formulario = EditarPerfil(request.POST ,instance = request.user)
+        if formulario.is_valid:
+            formulario.save()
+            return redirect('editar_perfil')
+    return render(request, 'editar_perfil.html', {'formulario' : formulario})
+
+class CambiarPass(PasswordChangeView):
+    template_name = 'cambiar_pass.html'
+    success_url = reverse_lazy('editar_perfil')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)

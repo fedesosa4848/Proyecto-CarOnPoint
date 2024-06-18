@@ -5,6 +5,7 @@ from .forms import FormularioAuto, FormularioMoto, FormularioCamion, FormularioC
 from django.shortcuts import render, redirect
 from django.http import Http404
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 
 #vista
@@ -21,6 +22,7 @@ def seleccionar_tipo_vehiculo(request):
     return render(request, 'inicio/templatesCreacion/creacion_v2.html')
 
 # Vista general para crear vehículos
+@login_required
 def crear_vehiculo(request, formulario_class, template_name):
     if request.method == 'POST':
         formulario = formulario_class(request.POST)
@@ -36,8 +38,7 @@ def crear_vehiculo(request, formulario_class, template_name):
                     vehiculo.save()
                     return redirect('creacion_exitosa', vehiculo.id, modelo.__name__.lower())
                 except ValidationError as e:
-                    formulario.add_error(None, e.message)  # Añadir error no relacionado a un campo específico
-        # Si el formulario no es válido, renderiza el formulario con los errores
+                    formulario.add_error(None, e.message)  
         return render(request, template_name, {'formulario': formulario})
     else:
         formulario = formulario_class()
@@ -239,3 +240,4 @@ def editar_vehiculo(request, tipo, id):
         form = Formulario(instance=vehiculo)
 
     return render(request, 'inicio/editar_vehiculo.html', {'form': form, 'vehiculo': vehiculo})
+

@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
 from django.contrib.auth.models import User
 
@@ -14,4 +14,14 @@ class MiFormulario(UserCreationForm):
         help_texts = {k:"" for k in fields}
         
 
+class EditarPerfil(UserChangeForm):
+    password = None
+    email = forms.EmailField()
+    firs_name = forms.CharField(label='Nombre')
+    last_name = forms.CharField(label='Apellido')
     
+    ...
+    
+    class Meta:
+        model = User
+        fields = ['email', 'first_name', 'last_name']

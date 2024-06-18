@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title_head %}
+Cambiar Password
+{% endblock title_head %}
+
+{% block h1_header %}
+Cambiar Password
+{% endblock h1_header %}
+
+{% block about_this_page %}
+Ingresa el nuevo Password
+{% endblock about_this_page %}
+
+{% block sub_info_info %}
+<div class="container mt-4">
+    <form action="{% url 'CambiarPass' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  
+        <button type="submit">Cambiar</button>
+    </form>
+</div>
+{% endblock sub_info_info %}
