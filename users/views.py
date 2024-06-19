@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-
+from users.models import DataUserExtra
 
 def log(request):
     if request.method == 'POST':
@@ -22,6 +22,9 @@ def log(request):
             if user is not None:
                 # Iniciar sesión si la autenticación es exitosa
                 login(request, user)
+                
+                DataUserExtra.objects.get_or_create(user=user)
+                
                 return redirect('inicio')  # Redirigir a la página de inicio
     else:
         formulario = AuthenticationForm()
@@ -41,12 +44,18 @@ def registro(request):
 
 @login_required
 def editar_perfil(request):
-    
-    formulario = EditarPerfil(instance = request.user)
+    datauserextra = request.user.datauserextra
+
+    formulario = EditarPerfil(initial = {'avatar' : datauserextra.avatar}, instance = request.user)
     
     if request.method == 'POST':
-        formulario = EditarPerfil(request.POST ,instance = request.user)
+        formulario = EditarPerfil(request.POST, request.FILES ,instance = request.user)
         if formulario.is_valid:
+            
+            
+            datauserextra.avatar = formulario.cleaned_data.get('avatar')
+            datauserextra.save()
+            
             formulario.save()
             return redirect('editar_perfil')
     return render(request, 'editar_perfil.html', {'formulario' : formulario})

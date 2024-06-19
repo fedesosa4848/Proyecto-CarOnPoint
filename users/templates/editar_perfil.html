@@ -14,7 +14,7 @@ Edita tus datos
 
 {% block sub_info_info %}
 <div class="container mt-4">
-    <form action="{% url 'editar_perfil' %}" method="post">
+    <form action="{% url 'editar_perfil' %}" method="post" enctype = 'multipart/from-data'>
         {% csrf_token %}
         {{ formulario.as_p }}  
         <button type="submit">Guardar cambios</button>
