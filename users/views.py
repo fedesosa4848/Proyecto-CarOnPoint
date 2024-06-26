@@ -44,21 +44,25 @@ def registro(request):
 
 @login_required
 def editar_perfil(request):
-    datauserextra = request.user.datauserextra
+    try:
+        datauserextra = request.user.datauserextra
+    except DataUserExtra.DoesNotExist:
+        # Crear el DataUserExtra si no existe
+        datauserextra = DataUserExtra.objects.create(user=request.user)
 
-    formulario = EditarPerfil(initial = {'avatar' : datauserextra.avatar}, instance = request.user)
-    
+    formulario = EditarPerfil(initial={'avatar': datauserextra.avatar}, instance=request.user)
+
     if request.method == 'POST':
-        formulario = EditarPerfil(request.POST, request.FILES ,instance = request.user)
-        if formulario.is_valid:
-            
-            
+        formulario = EditarPerfil(request.POST, request.FILES, instance=request.user)
+        if formulario.is_valid():
             datauserextra.avatar = formulario.cleaned_data.get('avatar')
             datauserextra.save()
-            
+
             formulario.save()
             return redirect('editar_perfil')
-    return render(request, 'editar_perfil.html', {'formulario' : formulario})
+
+    return render(request, 'editar_perfil.html', {'formulario': formulario})
+
 
 class CambiarPass(PasswordChangeView):
     template_name = 'cambiar_pass.html'
@@ -67,3 +71,8 @@ class CambiarPass(PasswordChangeView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
+    
+@login_required
+def listar_perfiles(request):
+    perfiles = DataUserExtra.objects.all()
+    return render(request, 'listar_perfiles.html', {'perfiles': perfiles})

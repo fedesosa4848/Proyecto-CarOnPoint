@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inbox</title>
+</head>
+<body>
+    <h1>Inbox</h1>
+    <a href="{% url 'send_message' %}">Send a Message</a>
+    <h2>Received Messages</h2>
+    <ul>
+        {% for message in received_messages %}
+            <li>
+                <strong>{{ message.sender.username }}:</strong> {{ message.content }} ({{ message.timestamp }})
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Sent Messages</h2>
+    <ul>
+        {% for message in sent_messages %}
+            <li>
+                <strong>To {{ message.recipient.username }}:</strong> {{ message.content }} ({{ message.timestamp }})
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
