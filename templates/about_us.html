@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Gestión de Usuarios y Vehículos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 20px;
+        }
+        .container {
+            margin-top: 50px;
         }
         h1, h2, h3 {
             color: #333;
@@ -20,98 +25,110 @@
             border-radius: 4px;
             font-size: 0.9em;
         }
+        .github-link {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
-    <h1>Sistema de Gestión de Usuarios y Vehículos</h1>
+    <div class="container">
+        <h1 class="mb-4">Sistema de Gestión de Usuarios y Vehículos</h1>
+        
+        <div class="mb-5">
+            <h2>Sobre mí</h2>
+            <p>Me llamo Federico Sosa. Soy estudiante avanzado en la carrera de Técnico Universitario en Programación en la Universidad Tecnológica Nacional (UTNMDP). Actualmente estoy cursando el curso de Python en CoderHouse y completé un curso de Project Management en Educación IT.</p>
+            
+            <p>Como pasatiempos, practico habilidades de desarrollo de algoritmos, toco la guitarra, me gusta jugar videojuegos y disfruto de la motocicleta.</p>
+            
+            <h3>Experiencia Laboral</h3>
+            <ul>
+                <li><strong>RIDER, PEDYA</strong><br>
+                Cadete temporario en la empresa Pedidos Ya S.A. (02/2020 – 02/2024)</li>
+                
+                <li><strong>JEFE DE BARRA, BAUM S.A</strong><br>
+                Dirigí un equipo en un ambiente de alta demanda, supervisando operaciones diarias y manteniendo estándares de servicio al cliente. Gestioné inventario, horarios y capacitación del personal, asegurando la calidad en la preparación de bebidas y relaciones positivas con clientes. Colaboré en estrategias de marketing y promoción para el éxito del establecimiento (03/2021 – 07/2023)</li>
+            </ul>
+            
+            <h3>Educación</h3>
+            <ul>
+                <li><strong>BACHILLER CS. SOCIALES, COL “SAN MIGUEL ARCANGEL”</strong><br>
+                Egresado en 2023</li>
+                
+                <li><strong>TECNICO UNIVERSITARIO EN PROGRAMACION, UTNMDP</strong><br>
+                Estudiante avanzado (75% completado), comenzado en 02/2022 - actualidad</li>
+            </ul>
+            
+            <h3>Aptitudes</h3>
+            <ul>
+                <li>Programación en C, Java, Python, Django</li>
+                <li>Manejo Paquete Office</li>
+                <li>Trabajo en equipo</li>
+                <li>Resolución de problemas</li>
+                <li>Inglés intermedio</li>
+            </ul>
 
-    <div>
-        <h2>Sobre mí</h2>
-        <p>Me llamo Federico Sosa. Soy estudiante avanzado en la carrera de Técnico Universitario en Programación en la Universidad Tecnológica Nacional (UTNMDP). Actualmente estoy cursando el curso de Python en CoderHouse y completé un curso de Project Management en Educación IT.</p>
+            <div class="github-link">
+                <h3>Perfil de GitHub</h3>
+                <p>Puedes encontrar mis proyectos y contribuciones en mi <a href="https://github.com/fedesosa4848?tab=repositories" target="_blank">perfil de GitHub</a>.</p>
+            </div>
+        </div>
         
-        <p>Como pasatiempos, practico habilidades de desarrollo de algoritmos, toco la guitarra, me gusta jugar videojuegos y disfruto de la motocicleta.</p>
+        <hr>
         
-        <h3>Experiencia Laboral</h3>
+        <h2>Descripción</h2>
+        <p>El sistema permite a los usuarios registrarse, iniciar sesión, crear, buscar vehículos y editarlos; así como también ver la lista de usuarios registrados. Proporciona una interfaz fácil de usar para la administración de datos y la interacción con la base de datos.</p>
+        
+        <h2>Características Principales</h2>
         <ul>
-            <li><strong>RIDER, PEDYA</strong><br>
-            Cadete temporario en la empresa Pedidos Ya S.A. (02/2020 – 02/2024)</li>
-            
-            <li><strong>JEFE DE BARRA, BAUM S.A</strong><br>
-            Dirigí un equipo en un ambiente de alta demanda, supervisando operaciones diarias y manteniendo estándares de servicio al cliente. Gestioné inventario, horarios y capacitación del personal, asegurando la calidad en la preparación de bebidas y relaciones positivas con clientes. Colaboré en estrategias de marketing y promoción para el éxito del establecimiento (03/2021 – 07/2023)</li>
+            <li>Registro de Usuarios: Los usuarios pueden registrarse proporcionando su nombre, apellido, edad y contraseña.</li>
+            <li>Inicio de Sesión: Los usuarios pueden iniciar sesión con su nombre de usuario y contraseña.</li>
+            <li>Creación de Vehículos: Los usuarios pueden crear vehículos proporcionando la marca, modelo, tipo de combustible y año de fabricación.</li>
+            <li>Búsqueda de Vehículos: Los usuarios pueden buscar vehículos por marca, modelo o año de fabricación.</li>
+            <li>Ver Usuarios: Los administradores pueden ver la lista de usuarios registrados en el sistema.</li>
+            <li>Editar Perfil: Los usuarios pueden editar su perfil, incluyendo la actualización de su información personal.</li>
+            <li>Agregar Avatar: Los usuarios pueden subir una imagen de perfil para personalizar su cuenta.</li>
+            <li>Sistema de Mensajería: Los usuarios pueden enviar y recibir mensajes dentro del sistema.</li>
         </ul>
         
-        <h3>Educación</h3>
-        <ul>
-            <li><strong>BACHILLER CS. SOCIALES, COL “SAN MIGUEL ARCANGEL”</strong><br>
-            Egresado en 2023</li>
-            
-            <li><strong>TECNICO UNIVERSITARIO EN PROGRAMACION, UTNMDP</strong><br>
-            Estudiante avanzado (75% completado), comenzado en 02/2022 - actualidad</li>
-        </ul>
+        <h2>Instalación</h2>
+        <h3>1. Clona el repositorio en tu máquina local:</h3>
+        <pre><code>$ git clone https://github.com/fedesosa4848/Tercera-Pre-Entrega-Sosa-Federico.git</code></pre>
+        <pre><code>$ cd Tercera-Pre-Entrega-Sosa-Federico</code></pre>
+        <pre><code>$ git fetch -a</code></pre>
+        <pre><code>$ git checkout develop</code></pre>
+    
+        <h3>2. Crea un entorno virtual e instala las dependencias:</h3>
+        <pre><code>$ python -m venv venv</code></pre>
+        <pre><code>$ source venv/bin/activate  # Linux/macOS</code></pre>
+        <pre><code>$ venv\Scripts\activate     # Windows</code></pre>
+        <pre><code>$ pip install -r requirements.txt</code></pre>
         
-        <h3>Aptitudes</h3>
-        <ul>
-            <li>Programación en C, Java, Python, Django</li>
-            <li>Manejo Paquete Office</li>
-            <li>Trabajo en equipo</li>
-            <li>Resolución de problemas</li>
-            <li>Inglés intermedio</li>
-        </ul>
+        <h3>3. Ejecuta las migraciones de la base de datos:</h3>
+        <pre><code>$ python manage.py migrate</code></pre>
+        
+        <h3>4. Inicia el servidor de desarrollo:</h3>
+        <pre><code>$ python manage.py runserver</code></pre>
+        
+        <h3>5. Accede al sistema:</h3>
+        <p>Desde tu navegador web en la dirección <a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a>.</p>
+        
+        <h2>Contribución</h2>
+        <p>Las contribuciones son bienvenidas. Si deseas contribuir al proyecto, sigue estos pasos:</p>
+        <ol>
+            <li>Haz un 'Fork' del proyecto.</li>
+            <li>Crea tu rama de características (<code>git checkout -b feature/AmazingFeature</code>).</li>
+            <li>Realiza tus cambios y haz un 'commit' (<code>git commit -m 'Add some AmazingFeature'</code>).</li>
+            <li>Sube tu rama (<code>git push origin feature/AmazingFeature</code>).</li>
+            <li>Abre un 'Pull Request'.</li>
+        </ol>
+        
+        <h2>Tecnologías Utilizadas</h2>
+        <ol>
+            <li>Django: Framework de desarrollo web en Python.</li>
+            <li>HTML/CSS: Lenguajes de marcado y estilos para la interfaz de usuario.</li>
+            <li>JavaScript: Lenguaje de programación para la interactividad en el frontend.</li>
+            <li>Bootstrap: Framework CSS para el diseño y la maquetación de páginas web.</li>
+        </ol>
     </div>
-    
-    <hr>
-    
-    <h2>Descripción</h2>
-    <p>El sistema permite a los usuarios registrarse, iniciar sesión, crear, buscar vehículos y editarlos; así como también ver la lista de usuarios registrados. Proporciona una interfaz fácil de usar para la administración de datos y la interacción con la base de datos.</p>
-    
-    <h2>Características Principales</h2>
-    <ul>
-        <li>Registro de Usuarios: Los usuarios pueden registrarse proporcionando su nombre, apellido, edad y contraseña.</li>
-        <li>Inicio de Sesión: Los usuarios pueden iniciar sesión con su nombre de usuario y contraseña.</li>
-        <li>Creación de Vehículos: Los usuarios pueden crear vehículos proporcionando la marca, modelo, tipo de combustible y año de fabricación.</li>
-        <li>Búsqueda de Vehículos: Los usuarios pueden buscar vehículos por marca, modelo o año de fabricación.</li>
-        <li>Ver Usuarios: Los administradores pueden ver la lista de usuarios registrados en el sistema.</li>
-    </ul>
-    
-    <h2>Instalación</h2>
-    <h3>1. Clona el repositorio en tu máquina local:</h3>
-    <pre><code>$ git clone https://github.com/fedesosa4848/Tercera-Pre-Entrega-Sosa-Federico.git</code></pre>
-    <pre><code>$ cd Tercera-Pre-Entrega-Sosa-Federico</code></pre>
-    <pre><code>$ git fetch -a</code></pre>
-    <pre><code>$ git checkout develop</code></pre>
-    
-    <h3>2. Crea un entorno virtual e instala las dependencias:</h3>
-    <pre><code>$ python -m venv venv</code></pre>
-    <pre><code>$ source venv/bin/activate  # Linux/macOS</code></pre>
-    <pre><code>$ venv\Scripts\activate     # Windows</code></pre>
-    <pre><code>$ pip install -r requirements.txt</code></pre>
-    
-    <h3>3. Ejecuta las migraciones de la base de datos:</h3>
-    <pre><code>$ python manage.py migrate</code></pre>
-    
-    <h3>4. Inicia el servidor de desarrollo:</h3>
-    <pre><code>$ python manage.py runserver</code></pre>
-    
-    <h3>5. Accede al sistema:</h3>
-    <p>Desde tu navegador web en la dirección <a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a>.</p>
-    
-    <h2>Contribución</h2>
-    <p>Las contribuciones son bienvenidas. Si deseas contribuir al proyecto, sigue estos pasos:</p>
-    <ol>
-        <li>Haz un 'Fork' del proyecto.</li>
-        <li>Crea tu rama de características (<code>git checkout -b feature/AmazingFeature</code>).</li>
-        <li>Realiza tus cambios y haz un 'commit' (<code>git commit -m 'Add some AmazingFeature'</code>).</li>
-        <li>Sube tu rama (<code>git push origin feature/AmazingFeature</code>).</li>
-        <li>Abre un 'Pull Request'.</li>
-    </ol>
-    
-    <h2>Tecnologías Utilizadas</h2>
-    <ol>
-        <li>Django: Framework de desarrollo web en Python.</li>
-        <li>HTML/CSS: Lenguajes de marcado y estilos para la interfaz de usuario.</li>
-        <li>JavaScript: Lenguaje de programación para la interactividad en el frontend.</li>
-        <li>Bootstrap: Framework CSS para el diseño y la maquetación de páginas web.</li>
-    </ol>
-
 </body>
 </html>
