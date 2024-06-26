@@ -2,26 +2,65 @@
 <html>
 <head>
     <title>Inbox</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        .message-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .message-list li {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .message-list li strong {
+            font-size: 1.2em;
+        }
+        .message-timestamp {
+            color: #888;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
-    <h1>Inbox</h1>
-    <a href="{% url 'send_message' %}">Send a Message</a>
-    <h2>Received Messages</h2>
-    <ul>
-        {% for message in received_messages %}
-            <li>
-                <strong>{{ message.sender.username }}:</strong> {{ message.content }} ({{ message.timestamp }})
-            </li>
-        {% endfor %}
-    </ul>
-
-    <h2>Sent Messages</h2>
-    <ul>
-        {% for message in sent_messages %}
-            <li>
-                <strong>To {{ message.recipient.username }}:</strong> {{ message.content }} ({{ message.timestamp }})
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h1 class="mb-4">Inbox</h1>
+                <a href="{% url 'send_message' %}" class="btn btn-primary mb-4">Send a Message</a>
+                
+                <h2 class="mb-3">Received Messages</h2>
+                <ul class="message-list">
+                    {% for message in received_messages %}
+                        <li>
+                            <strong>{{ message.sender.username }}:</strong> 
+                            <span>{{ message.content }}</span>
+                            <div class="message-timestamp">{{ message.timestamp }}</div>
+                        </li>
+                    {% endfor %}
+                </ul>
+                
+                <h2 class="mb-3">Sent Messages</h2>
+                <ul class="message-list">
+                    {% for message in sent_messages %}
+                        <li>
+                            <strong>To {{ message.recipient.username }}:</strong> 
+                            <span>{{ message.content }}</span>
+                            <div class="message-timestamp">{{ message.timestamp }}</div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
