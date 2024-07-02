@@ -2,13 +2,15 @@ from django.db import models
 
 from django.db import models
 from django.core.exceptions import ValidationError
-import re
+from django.utils import timezone
+
 
 class Vehiculo(models.Model):
     marca = models.CharField(max_length=20)
     modelo = models.CharField(max_length=20)
     combustible = models.CharField(max_length=20)
     ano_fabricacion = models.PositiveIntegerField()
+    uploadDate = models.DateTimeField(default=timezone.now)  # Agregar default=timezone.now
 
     class Meta:
         abstract = True
@@ -33,5 +35,3 @@ class Camion(Vehiculo):
 
 class Camioneta(Vehiculo):
     capacidad_pasajeros = models.PositiveIntegerField()
-
-

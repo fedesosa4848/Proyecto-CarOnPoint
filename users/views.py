@@ -50,16 +50,20 @@ def editar_perfil(request):
         # Crear el DataUserExtra si no existe
         datauserextra = DataUserExtra.objects.create(user=request.user)
 
-    formulario = EditarPerfil(initial={'avatar': datauserextra.avatar}, instance=request.user)
-
     if request.method == 'POST':
         formulario = EditarPerfil(request.POST, request.FILES, instance=request.user)
         if formulario.is_valid():
+            request.user.email = formulario.cleaned_data.get('email')
+            request.user.first_name = formulario.cleaned_data.get('first_name')
+            request.user.last_name = formulario.cleaned_data.get('last_name')
+            request.user.save()
+
             datauserextra.avatar = formulario.cleaned_data.get('avatar')
             datauserextra.save()
 
-            formulario.save()
             return redirect('editar_perfil')
+    else:
+        formulario = EditarPerfil(instance=request.user)
 
     return render(request, 'editar_perfil.html', {'formulario': formulario})
 

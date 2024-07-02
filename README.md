@@ -12,7 +12,8 @@ El sistema permite a los usuarios registrarse, iniciar sesión, crear, buscar ve
 - Inicio de Sesión: Los usuarios pueden iniciar sesión con su nombre de usuario y contraseña.
 - Creación de Vehículos: Los usuarios pueden crear vehículos proporcionando la marca, modelo, tipo de combustible y año de fabricación.
 - Búsqueda de Vehículos: Los usuarios pueden buscar vehículos por marca, modelo o año de fabricación.
-- Ver Usuarios: Los administradores pueden ver la lista de usuarios registrados en el sistema.
+- Edición de Perfil: Los usuarios pueden editar su perfil y agregar un avatar.
+- Sistema de Mensajería: Los usuarios pueden enviar y recibir mensajes dentro del sistema.
 
 ## Instalación
 

@@ -30,6 +30,7 @@ Listado de Vehículos
                                 <h5 class="card-title">{{ auto.marca }} {{ auto.modelo }}</h5>
                                 <p class="card-text"><strong>Combustible:</strong> {{ auto.combustible }}</p>
                                 <p class="card-text"><strong>Año de fabricación:</strong> {{ auto.ano_fabricacion }}</p>
+                                <p class="card-text"><strong>Fecha de carga:</strong> {{ auto.uploadDate|date:"d/m/Y H:i" }}</p>
                                 <a href="{% url 'ver_detalle_vehiculo' 'auto' auto.id %}" class="btn btn-info">Ver Detalles</a>
                             </div>
                         </div>
@@ -52,6 +53,7 @@ Listado de Vehículos
                                 <h5 class="card-title">{{ moto.marca }} {{ moto.modelo }}</h5>
                                 <p class="card-text"><strong>Combustible:</strong> {{ moto.combustible }}</p>
                                 <p class="card-text"><strong>Año de fabricación:</strong> {{ moto.ano_fabricacion }}</p>
+                                <p class="card-text"><strong>Fecha de carga:</strong> {{ moto.uploadDate|date:"d/m/Y H:i" }}</p>
                                 <a href="{% url 'ver_detalle_vehiculo' 'moto' moto.id %}" class="btn btn-info">Ver Detalles</a>
                             </div>
                         </div>
@@ -74,6 +76,7 @@ Listado de Vehículos
                                 <h5 class="card-title">{{ camion.marca }} {{ camion.modelo }}</h5>
                                 <p class="card-text"><strong>Combustible:</strong> {{ camion.combustible }}</p>
                                 <p class="card-text"><strong>Año de fabricación:</strong> {{ camion.ano_fabricacion }}</p>
+                                <p class="card-text"><strong>Fecha de carga:</strong> {{ camion.uploadDate|date:"d/m/Y H:i" }}</p>
                                 <a href="{% url 'ver_detalle_vehiculo' 'camion' camion.id %}" class="btn btn-info">Ver Detalles</a>
                             </div>
                         </div>
@@ -96,6 +99,7 @@ Listado de Vehículos
                                 <h5 class="card-title">{{ camioneta.marca }} {{ camioneta.modelo }}</h5>
                                 <p class="card-text"><strong>Combustible:</strong> {{ camioneta.combustible }}</p>
                                 <p class="card-text"><strong>Año de fabricación:</strong> {{ camioneta.ano_fabricacion }}</p>
+                                <p class="card-text"><strong>Fecha de carga:</strong> {{ camioneta.uploadDate|date:"d/m/Y H:i" }}</p>
                                 <a href="{% url 'ver_detalle_vehiculo' 'camioneta' camioneta.id %}" class="btn btn-info">Ver Detalles</a>
                             </div>
                         </div>

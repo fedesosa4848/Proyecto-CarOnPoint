@@ -1,66 +1,50 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Inbox</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .container {
-            margin-top: 50px;
-        }
-        .message-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        .message-list li {
-            margin-bottom: 15px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .message-list li strong {
-            font-size: 1.2em;
-        }
-        .message-timestamp {
-            color: #888;
-            font-size: 0.9em;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <h1 class="mb-4">Inbox</h1>
-                <a href="{% url 'send_message' %}" class="btn btn-primary mb-4">Send a Message</a>
-                
-                <h2 class="mb-3">Received Messages</h2>
-                <ul class="message-list">
-                    {% for message in received_messages %}
-                        <li>
-                            <strong>{{ message.sender.username }}:</strong> 
-                            <span>{{ message.content }}</span>
-                            <div class="message-timestamp">{{ message.timestamp }}</div>
-                        </li>
-                    {% endfor %}
-                </ul>
-                
-                <h2 class="mb-3">Sent Messages</h2>
-                <ul class="message-list">
-                    {% for message in sent_messages %}
-                        <li>
-                            <strong>To {{ message.recipient.username }}:</strong> 
-                            <span>{{ message.content }}</span>
-                            <div class="message-timestamp">{{ message.timestamp }}</div>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
+{% extends "inicio/index.html" %}
+
+{% block title_head %}
+Inbox
+{% endblock title_head %}
+
+{% block h1_header %}
+Inbox
+{% endblock h1_header %}
+
+{% block about_this_page %}
+Aquí puedes ver tus mensajes recibidos y enviados.
+{% endblock about_this_page %}
+
+{% block sub_info_title %}
+Mensajes
+{% endblock sub_info_title %}
+
+{% block sub_info_info %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="mb-4">Inbox</h1>
+            <a href="{% url 'send_message' %}" class="btn btn-primary mb-4">Enviar un mensaje</a>
+            
+            <h2 class="mb-3">Mensajes recibidos</h2>
+            <ul class="message-list">
+                {% for message in received_messages %}
+                    <li>
+                        <strong>{{ message.sender.username }}:</strong> 
+                        <span>{{ message.content }}</span>
+                        <div class="message-timestamp">{{ message.timestamp|date:"d/m/Y H:i" }}</div>
+                    </li>
+                {% endfor %}
+            </ul>
+            
+            <h2 class="mb-3">Mensajes enviados</h2>
+            <ul class="message-list">
+                {% for message in sent_messages %}
+                    <li>
+                        <strong>Para {{ message.recipient.username }}:</strong> 
+                        <span>{{ message.content }}</span>
+                        <div class="message-timestamp">{{ message.timestamp|date:"d/m/Y H:i" }}</div>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+</div>
+{% endblock sub_info_info %}

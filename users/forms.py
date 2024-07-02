@@ -17,10 +17,25 @@ class MiFormulario(UserCreationForm):
 class EditarPerfil(UserChangeForm):
     password = None
     email = forms.EmailField()
-    firs_name = forms.CharField(label='Nombre')
+    first_name = forms.CharField(label='Nombre')
     last_name = forms.CharField(label='Apellido')
-    avatar = forms.ImageField(required= False,label='Avatar')
+    avatar = forms.ImageField(required=False, label='Avatar')
 
     class Meta:
         model = User
         fields = ['email', 'first_name', 'last_name', 'avatar']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['avatar'].widget.attrs['class'] = 'form-control-file'
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.email = self.cleaned_data['email']
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+
+        if commit:
+            user.save()
+
+        return user

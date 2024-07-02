@@ -8,9 +8,8 @@ Catálogo de Vehículos
 Catálogo de Vehículos
 {% endblock h1_header %}
 
-
 {% block about_this_page %}
- 
+
 {% endblock about_this_page %}
 
 {% block sub_info_title %}
@@ -31,6 +30,7 @@ Listado de Vehículos
                                 <h5 class="card-title">{{ auto.marca }} {{ auto.modelo }}</h5>
                                 <p class="card-text"><strong>Combustible:</strong> {{ auto.combustible }}</p>
                                 <p class="card-text"><strong>Año de fabricación:</strong> {{ auto.ano_fabricacion }}</p>
+                                <p class="card-text"><strong>Fecha de carga:</strong> {{ auto.uploadDate|date:"d/m/Y H:i" }}</p>
                                 <div class="btn-group mt-3" role="group">
                                     <form method="post" action="{% url 'eliminar_vehiculo' auto.id %}">
                                         {% csrf_token %}
@@ -60,6 +60,7 @@ Listado de Vehículos
                                 <h5 class="card-title">{{ moto.marca }} {{ moto.modelo }}</h5>
                                 <p class="card-text"><strong>Combustible:</strong> {{ moto.combustible }}</p>
                                 <p class="card-text"><strong>Año de fabricación:</strong> {{ moto.ano_fabricacion }}</p>
+                                <p class="card-text"><strong>Fecha de carga:</strong> {{ moto.uploadDate|date:"d/m/Y H:i" }}</p>
                                 <div class="btn-group mt-3" role="group">
                                     <form method="post" action="{% url 'eliminar_vehiculo' moto.id %}">
                                         {% csrf_token %}
@@ -89,6 +90,7 @@ Listado de Vehículos
                                 <h5 class="card-title">{{ camion.marca }} {{ camion.modelo }}</h5>
                                 <p class="card-text"><strong>Combustible:</strong> {{ camion.combustible }}</p>
                                 <p class="card-text"><strong>Año de fabricación:</strong> {{ camion.ano_fabricacion }}</p>
+                                <p class="card-text"><strong>Fecha de carga:</strong> {{ camion.uploadDate|date:"d/m/Y H:i" }}</p>
                                 <div class="btn-group mt-3" role="group">
                                     <form method="post" action="{% url 'eliminar_vehiculo' camion.id %}">
                                         {% csrf_token %}
@@ -118,6 +120,7 @@ Listado de Vehículos
                                 <h5 class="card-title">{{ camioneta.marca }} {{ camioneta.modelo }}</h5>
                                 <p class="card-text"><strong>Combustible:</strong> {{ camioneta.combustible }}</p>
                                 <p class="card-text"><strong>Año de fabricación:</strong> {{ camioneta.ano_fabricacion }}</p>
+                                <p class="card-text"><strong>Fecha de carga:</strong> {{ camioneta.uploadDate|date:"d/m/Y H:i" }}</p>
                                 <div class="btn-group mt-3" role="group">
                                     <form method="post" action="{% url 'eliminar_vehiculo' camioneta.id %}">
                                         {% csrf_token %}

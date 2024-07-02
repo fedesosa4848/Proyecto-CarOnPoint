@@ -1,123 +1,139 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>
-            {% block title_head %}
-            Business Frontpage - Start Bootstrap Template
-            {% endblock title_head %}
-        </title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
-        <style>
-            header { 
-                background-image: url(" {% block background %}{% static 'imagenes/road-inside-parking.jpg' %}{% endblock background %} ");
-                background-size: cover;
-                background-position: center;
-            }
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>
+        {% block title_head %}
+        Business Frontpage - Start Bootstrap Template
+        {% endblock title_head %}
+    </title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <style>
+        header { 
+            background-image: url("{% block background %}{% static 'imagenes/road-inside-parking.jpg' %}{% endblock background %}");
+            background-size: cover;
+            background-position: center;
+        }
 
-            .header-title {
-                color: #000000;
-            }
+        .header-title {
+            color: #000000;
+        }
 
-            .lead {
-                color: #000000;
-                opacity: 1;
-            }
-        </style>
-    </head>
-    <body>
-   <!-- Responsive navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container px-5">
-        <a class="navbar-brand" href="{% url 'inicio' %}">{{ date_time|date:"d M Y H:i" }}</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'inicio' %}">Inicio</a></li>
+        .lead {
+            color: #000000;
+            opacity: 1;
+        }
 
-                {% if request.user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'catalogo-vehiculos' %}">Catalogo</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'editar_perfil' %}">Editar</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'seleccionar_tipo_vehiculo' %}">Publicar</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'listar_perfiles' %}">Lista de Perfiles</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'inbox' %}">Inbox</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'send_message' %}">Send Message</a></li>
-                    <li class="nav-item">
-                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
-                            {% csrf_token %}
-                            <button type="submit" class="nav-link active" style="background:none;border:none;color:white;cursor:pointer;">Cerrar Sesión</button>
-                        </form>
-                    </li>
-                {% else %}
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'catalogo' %}">Catalogo</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'login' %}">Login</a></li>
-                {% endif %}
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'about-us' %}">About me</a></li>
-            </ul>
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Responsive navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container px-5">
+            <a class="navbar-brand" href="{% url 'inicio' %}">{{ date_time|date:"d M Y H:i" }}</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'inicio' %}">Inicio</a></li>
+
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'catalogo-vehiculos' %}">Catalogo</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'seleccionar_tipo_vehiculo' %}">Publicar</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'listar_perfiles' %}">Lista de Perfiles</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'inbox' %}">Inbox</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'send_message' %}">Send Message</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'editar_perfil' %}">
+                                {% if request.user.datauserextra.avatar %}
+                                    <img src="{{ request.user.datauserextra.avatar.url }}" alt="Avatar" class="avatar">
+                                {% else %}
+                                    <i class="bi bi-person-circle"></i> <!-- Icono predeterminado si no hay avatar -->
+                                {% endif %}
+                                Editar Perfil
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="nav-link active" style="background:none;border:none;color:white;cursor:pointer;">Cerrar Sesión</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'catalogo' %}">Catalogo</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'about-us' %}">About me</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-        <!-- Header-->
-        <header class="py-5">
-            <div class="container px-5">
-                <div class="row gx-5 justify-content-center">
-                    <div class="col-lg-6">
-                        <div class="text-center my-5">
-                            <h1 class="display-5 fw-bolder header-title mb-2">
-                                {% block h1_header %}
-                                {% endblock h1_header %}
-                            </h1>
-                            <p class="lead mb-4">
-                                {% block about_this_page %}
-                                
-                                {% endblock about_this_page %}
-                            </p>
-                        </div>
+    <!-- Header-->
+    <header class="py-5">
+        <div class="container px-5">
+            <div class="row gx-5 justify-content-center">
+                <div class="col-lg-6">
+                    <div class="text-center my-5">
+                        <h1 class="display-5 fw-bolder header-title mb-2">
+                            {% block h1_header %}
+                            {% endblock h1_header %}
+                        </h1>
+                        <p class="lead mb-4">
+                            {% block about_this_page %}
+                            
+                            {% endblock about_this_page %}
+                        </p>
                     </div>
                 </div>
             </div>
-        </header>
-        <!-- Features section-->
-        <section class="bg-light py-5 border-bottom">
-            <div class="container px-5 my-5">
-                <div class="text-center mb-5">
-                    <h2 class="fw-bolder">{% block sub_info_title %}{% endblock sub_info_title %} </h2>
-                    <p class="lead mb-0"> {% block sub_info_info %}{% endblock sub_info_info %}  </p>
-                    <p class="lead mb-0"> {% block sub_info_info1 %}{% endblock sub_info_info1 %}  </p>
-                </div>
+        </div>
+    </header>
+    <!-- Features section-->
+    <section class="bg-light py-5 border-bottom">
+        <div class="container px-5 my-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bolder">{% block sub_info_title %}{% endblock sub_info_title %}</h2>
+                <p class="lead mb-0"> {% block sub_info_info %}{% endblock sub_info_info %}  </p>
+                <p class="lead mb-0"> {% block sub_info_info1 %}{% endblock sub_info_info1 %}  </p>
             </div>
-        </section>
-        <!-- Call to action section-->
-        {% if not request.user.is_authenticated %}
-        <section class="py-5 bg-light">
-            <div class="container px-5 my-5">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-lg-8 col-xl-7">
-                        <div class="text-center text-xl-start">
-                            <h2 class="fw-bolder">Sumate a CarOnPoint Society</h2>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-xl-5 text-center">
-                        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'SignIn' %}">Sign In</a>
+        </div>
+    </section>
+    <!-- Call to action section-->
+    {% if not request.user.is_authenticated %}
+    <section class="py-5 bg-light">
+        <div class="container px-5 my-5">
+            <div class="row gx-5 align-items-center">
+                <div class="col-lg-8 col-xl-7">
+                    <div class="text-center text-xl-start">
+                        <h2 class="fw-bolder">Sumate a CarOnPoint Society</h2>
                     </div>
                 </div>
+                <div class="col-lg-4 col-xl-5 text-center">
+                    <a class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'SignIn' %}">Sign In</a>
+                </div>
             </div>
-        </section>
-        {% endif %}
+        </div>
+    </section>
+    {% endif %}
 
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="{% static 'js/scripts.js' %}"></script>
-    </body>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
 </html>

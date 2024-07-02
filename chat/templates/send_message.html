@@ -1,37 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Send Message</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .container {
-            margin-top: 50px;
-        }
-        form {
-            background: #f7f7f7;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <h1 class="mb-4">Send Message</h1>
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit" class="btn btn-primary">Send</button>
-                </form>
-            </div>
+{% extends "inicio/index.html" %}
+
+{% block title_head %}
+Enviar Mensaje
+{% endblock title_head %}
+
+{% block h1_header %}
+Enviar Mensaje
+{% endblock h1_header %}
+
+{% block about_this_page %}
+Completa el formulario para enviar un mensaje.
+{% endblock about_this_page %}
+
+{% block sub_info_title %}
+Nuevo Mensaje
+{% endblock sub_info_title %}
+
+{% block sub_info_info %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="mb-4">Enviar Mensaje</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
         </div>
     </div>
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+</div>
+{% endblock sub_info_info %}

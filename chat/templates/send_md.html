@@ -1,0 +1,20 @@
+{% extends "inicio/index.html" %}
+
+{% block title_head %}
+Enviar Mensaje
+{% endblock title_head %}
+
+{% block h1_header %}
+Enviar Mensaje a {{ recipient.username }}
+{% endblock h1_header %}
+
+{% block sub_info_info %}
+<div class="container mt-5">
+    <h1 class="mb-4">Enviar Mensaje a {{ recipient.username }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+</div>
+{% endblock sub_info_info %}
