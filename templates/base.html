@@ -39,6 +39,11 @@
             border-radius: 50%;
             margin-left: 10px;
         }
+
+        .nav-link.avatar-link {
+            display: flex;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
@@ -58,11 +63,11 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'inbox' %}">Inbox</a></li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'send_message' %}">Send Message</a></li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'editar_perfil' %}">
+                            <a class="nav-link active avatar-link" aria-current="page" href="{% url 'editar_perfil' %}">
                                 {% if request.user.datauserextra.avatar %}
                                     <img src="{{ request.user.datauserextra.avatar.url }}" alt="Avatar" class="avatar">
                                 {% else %}
-                                    <i class="bi bi-person-circle"></i> <!-- Icono predeterminado si no hay avatar -->
+                                    <i class="bi bi-person-circle avatar"></i> <!-- Icono predeterminado si no hay avatar -->
                                 {% endif %}
                                 Editar Perfil
                             </a>
