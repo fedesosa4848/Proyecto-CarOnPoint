@@ -1,6 +1,6 @@
 # Sistema de Gestión de Usuarios y Vehículos
 
-Este proyecto es un sistema de gestión de usuarios y vehículos desarrollado como parte de un trabajo práctico para CoderHouse.
+Este proyecto es un sistema de gestión de usuarios y vehículos desarrollado por Federico Sosa como parte de un trabajo práctico final para CoderHouse.
 
 ## Descripción
 
