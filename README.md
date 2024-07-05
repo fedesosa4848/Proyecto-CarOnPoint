@@ -4,7 +4,7 @@ Este proyecto es un sistema de gestión de usuarios y vehículos desarrollado po
 
 ## Descripción
 
-El sistema permite a los usuarios registrarse, iniciar sesión, crear, buscar vehículos y editarlos; así como también ver la lista de usuarios registrados. Proporciona una interfaz fácil de usar para la administración de datos y la interacción con la base de datos.
+El sistema permite a los usuarios registrarse, iniciar sesión, crear, buscar vehículos y editarlos; así como también ver la lista de usuarios registrados. Proporciona una interfaz fácil de usar para la administración de datos y la interacción con la base de datos. Link a video explicativo sobre la plataforma https://www.youtube.com/watch?v=kEBpn4-TKzU
 
 ## Características Principales
 
