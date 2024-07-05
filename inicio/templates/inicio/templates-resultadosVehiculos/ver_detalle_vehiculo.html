@@ -18,6 +18,8 @@ Detalles del Vehículo
             <h5 class="card-title">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h5>
             <p class="card-text"><strong>Combustible:</strong> {{ vehiculo.combustible }}</p>
             <p class="card-text"><strong>Año de fabricación:</strong> {{ vehiculo.ano_fabricacion }}</p>
+            <p class="card-text"><strong>Publicado por:</strong> {{ vehiculo.publicado_por.username }}</p>
+            <p class="card-text"><strong>Precio:</strong> {{ vehiculo.precio }}</p>
 
             {% if vehiculo.imagen %}
             <p class="card-text"><strong>Imagen del Vehículo:</strong></p>

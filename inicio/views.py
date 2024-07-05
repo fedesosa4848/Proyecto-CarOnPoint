@@ -34,11 +34,12 @@ def crear_vehiculo(request, formulario_class, template_name):
             else:
                 try:
                     vehiculo = formulario.save(commit=False)
+                    vehiculo.publicado_por = request.user  # Asigna el usuario actual
                     vehiculo.full_clean()  # Ejecuta las validaciones del modelo
                     vehiculo.save()
                     return redirect('creacion_exitosa', vehiculo.id, modelo.__name__.lower())
                 except ValidationError as e:
-                    formulario.add_error(None, e.message)  
+                    formulario.add_error(None, e.message)
         return render(request, template_name, {'formulario': formulario})
     else:
         formulario = formulario_class()

@@ -9,11 +9,12 @@ Crear Auto
 {% endblock h1_header %}
 
 {% block about_this_page %}
-Ingresa los datos del auto{% endblock about_this_page %}
+Ingresa los datos del auto
+{% endblock about_this_page %}
 
 {% block sub_info_info %}
 <div class="container mt-4">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ formulario.as_p }}
         <button type="submit" class="btn btn-primary">Crear Auto</button>

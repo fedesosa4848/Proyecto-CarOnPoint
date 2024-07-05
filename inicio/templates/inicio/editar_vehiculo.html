@@ -8,14 +8,13 @@ Editar Vehículo - {{ vehiculo.marca }} {{ vehiculo.modelo }}
 Editar Vehículo
 {% endblock h1_header %}
 
-
 {% block about_this_page %}
-Corrige los datos erroneos
+Corrige los datos erróneos
 {% endblock about_this_page %}
 
 {% block sub_info_info %}
 <div class="container mt-4">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Guardar Cambios</button>

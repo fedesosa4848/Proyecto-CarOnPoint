@@ -3,6 +3,8 @@ from django.db import models
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils import timezone
+from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator
 
 
 class Vehiculo(models.Model):
@@ -12,6 +14,9 @@ class Vehiculo(models.Model):
     ano_fabricacion = models.PositiveIntegerField()
     imagen = models.ImageField(upload_to='vehiculos/', null=True, blank=True)
     uploadDate = models.DateTimeField(default=timezone.now)
+    publicado_por = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    precio = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(1000)], default=1000.00)
+
 
     class Meta:
         abstract = True
