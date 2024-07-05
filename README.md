@@ -1,10 +1,10 @@
-# Sistema de Gestión de Usuarios y Vehículos
+# Sistema de Gestión de Usuarios y Vehículos "Car On Point"
 
 Este proyecto es un sistema de gestión de usuarios y vehículos desarrollado por Federico Sosa como parte de un trabajo práctico final para CoderHouse.
 
 ## Descripción
 
-El sistema permite a los usuarios registrarse, iniciar sesión, crear, buscar vehículos y editarlos; así como también ver la lista de usuarios registrados. Proporciona una interfaz fácil de usar para la administración de datos y la interacción con la base de datos. Link a video explicativo sobre la plataforma https://www.youtube.com/watch?v=kEBpn4-TKzU
+El sistema CoP permite a los usuarios registrarse, iniciar sesión, crear, buscar vehículos y editarlos; así como también ver la lista de usuarios registrados. Proporciona una interfaz fácil de usar para la administración de datos y la interacción con la base de datos. Link a video explicativo sobre la plataforma https://www.youtube.com/watch?v=kEBpn4-TKzU
 
 ## Características Principales
 
