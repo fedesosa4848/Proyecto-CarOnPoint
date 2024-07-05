@@ -14,7 +14,7 @@ Ingresa los datos de la camioneta
 
 {% block sub_info_info %}
 <div class="container mt-4">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">  
         {% csrf_token %}
         {{ formulario.as_p }}
         <button type="submit" class="btn btn-primary">Crear Camioneta</button>

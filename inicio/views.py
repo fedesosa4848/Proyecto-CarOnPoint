@@ -25,7 +25,7 @@ def seleccionar_tipo_vehiculo(request):
 @login_required
 def crear_vehiculo(request, formulario_class, template_name):
     if request.method == 'POST':
-        formulario = formulario_class(request.POST)
+        formulario = formulario_class(request.POST, request.FILES)  # Asegúrate de manejar los archivos
         if formulario.is_valid():
             datos_vehiculo = formulario.cleaned_data
             modelo = formulario_class.Meta.model
@@ -231,7 +231,7 @@ def editar_vehiculo(request, tipo, id):
 
     if request.method == 'POST':
         # Crear una instancia del formulario y asignar datos para guardar
-        form = Formulario(request.POST, instance=vehiculo)
+        form = Formulario(request.POST, request.FILES, instance=vehiculo)
         if form.is_valid():
             form.save()
             return redirect('catalogo-vehiculos')  # Redirigir al catálogo después de editar
@@ -240,4 +240,3 @@ def editar_vehiculo(request, tipo, id):
         form = Formulario(instance=vehiculo)
 
     return render(request, 'inicio/editar_vehiculo.html', {'form': form, 'vehiculo': vehiculo})
-

@@ -10,7 +10,8 @@ class Vehiculo(models.Model):
     modelo = models.CharField(max_length=20)
     combustible = models.CharField(max_length=20)
     ano_fabricacion = models.PositiveIntegerField()
-    uploadDate = models.DateTimeField(default=timezone.now)  # Agregar default=timezone.now
+    imagen = models.ImageField(upload_to='vehiculos/', null=True, blank=True)
+    uploadDate = models.DateTimeField(default=timezone.now)
 
     class Meta:
         abstract = True

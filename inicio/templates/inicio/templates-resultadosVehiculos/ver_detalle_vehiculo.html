@@ -8,9 +8,8 @@ Detalles del Vehículo - {{ vehiculo.marca }} {{ vehiculo.modelo }}
 Detalles del Vehículo
 {% endblock h1_header %}
 
-
 {% block about_this_page %}
-    {% endblock about_this_page %}
+{% endblock about_this_page %}
 
 {% block sub_info_info %}
 <div class="container mt-4">
@@ -19,6 +18,11 @@ Detalles del Vehículo
             <h5 class="card-title">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h5>
             <p class="card-text"><strong>Combustible:</strong> {{ vehiculo.combustible }}</p>
             <p class="card-text"><strong>Año de fabricación:</strong> {{ vehiculo.ano_fabricacion }}</p>
+
+            {% if vehiculo.imagen %}
+            <p class="card-text"><strong>Imagen del Vehículo:</strong></p>
+            <img src="{{ vehiculo.imagen.url }}" alt="Imagen de {{ vehiculo.marca }} {{ vehiculo.modelo }}" style="max-width: 100%;">
+            {% endif %}
 
             {% if tipo == 'auto' %}
             <p class="card-text"><strong>Número de Puertas:</strong> {{ vehiculo.numero_puertas }}</p>

@@ -9,24 +9,31 @@ Inicio
 {% endblock background_image %}
 
 {% block h1_header %}
-Bienvenido a CarOnPoint
+{% if request.user.is_authenticated %}
+    Bienvenido a CarOnPoint, {{ request.user.username }}!
+{% else %}
+    Bienvenido a CarOnPoint
+{% endif %}
 {% endblock h1_header %}
 
 {% block about_this_page %}
-Descubre la nueva forma de comprar vehiculos en línea con CarOnPoint: ¡donde la variedad y la comodidad se unen para brindarte la mejor experiencia de compra!
+Descubre la nueva forma de comprar vehículos en línea con CarOnPoint: ¡donde la variedad y la comodidad se unen para brindarte la mejor experiencia de compra!
 {% endblock about_this_page %}
 
-{% block sub_info_info %}En nuestra plataforma, te ofrecemos una experiencia de compra  de vehiculos en línea simple y eficiente, donde podrás encontrar tu proximo vehiculo a precios competitivos...
+{% block sub_info_info %}
+En nuestra plataforma, te ofrecemos una experiencia de compra de vehículos en línea simple y eficiente, donde podrás encontrar tu próximo vehículo.
 {% endblock sub_info_info %}
 
 {% block info_registro %}
+{% if not request.user.is_authenticated %}
     <h2 class="fw-bolder">Sumate a CarOnPoint Society</h2>
+{% endif %}
 {% endblock info_registro %}
 
 {% block register %}
-    <div class="col-lg-4 col-xl-5 text-center"><a class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'SignIn' %}">Sign In</a></div>
+{% if not request.user.is_authenticated %}
+    <div class="col-lg-4 col-xl-5 text-center">
+        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'SignIn' %}">Sign In</a>
+    </div>
+{% endif %}
 {% endblock register %}
-
-
-
-
