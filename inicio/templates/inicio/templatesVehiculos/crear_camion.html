@@ -1,23 +1,23 @@
 {% extends "inicio/index.html" %}
 
 {% block title_head %}
-Crear Camion
+Crear Camión
 {% endblock title_head %}
 
 {% block h1_header %}
-Crear Camion
+Crear Camión
 {% endblock h1_header %}
 
 {% block about_this_page %}
-Ingresa los datos del camion
+Ingresa los datos del camión
 {% endblock about_this_page %}
 
 {% block sub_info_info %}
 <div class="container mt-4">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ formulario.as_p }}
-        <button type="submit" class="btn btn-primary">Crear Camion</button>
+        <button type="submit" class="btn btn-primary">Crear Camión</button>
     </form>
 </div>
 {% endblock sub_info_info %}

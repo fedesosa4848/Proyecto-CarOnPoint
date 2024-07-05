@@ -25,7 +25,7 @@ def seleccionar_tipo_vehiculo(request):
 @login_required
 def crear_vehiculo(request, formulario_class, template_name):
     if request.method == 'POST':
-        formulario = formulario_class(request.POST, request.FILES)  # Asegúrate de manejar los archivos
+        formulario = formulario_class(request.POST, request.FILES)
         if formulario.is_valid():
             datos_vehiculo = formulario.cleaned_data
             modelo = formulario_class.Meta.model
