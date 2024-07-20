@@ -14,9 +14,30 @@ Ingresa nombre de usuario y contraseña
 
 {% block sub_info_info %}
 <div class="container mt-4">
+    <div class="personita-container">
+        <div class="personita">
+            <div class="head">
+                <div class="eyes">
+                    <div class="eye left-eye">
+                        <div class="pupil"></div>
+                    </div>
+                    <div class="eye right-eye">
+                        <div class="pupil"></div>
+                    </div>
+                </div>
+                <div class="eyes-covered">
+                    <div class="cover left-cover"></div>
+                    <div class="cover right-cover"></div>
+                </div>
+                <div class="mouth"></div>
+            </div>
+            <div class="body"></div>
+            <div class="arms"></div>
+        </div>
+    </div>
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
-        {{ formulario.as_p }}  <!-- Mostrar el formulario con formato de párrafos -->
+        {{ formulario.as_p }}
         <button type="submit">Login</button>
     </form>
 </div>

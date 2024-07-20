@@ -104,6 +104,151 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+/* Archivo static/css/styles.css */
+
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Estilos para la personita */
+.personita-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.personita {
+  position: relative;
+  width: 60px;
+  height: 100px;
+}
+
+.head {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  border: 2px solid #000;
+}
+
+.eyes {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 40px;
+  height: 20px;
+  display: flex;
+  justify-content: space-between;
+  transform: translateX(-50%);
+}
+
+.eye {
+  width: 15px;
+  height: 15px;
+  background-color: #fff;
+  border: 2px solid #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pupil {
+  width: 6px;
+  height: 6px;
+  background-color: #000;
+  border-radius: 50%;
+}
+
+.eyes-covered {
+  display: none;
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  width: 40px;
+  height: 10px;
+  display: flex;
+  justify-content: space-between;
+  transform: translateX(-50%);
+}
+
+.cover {
+  width: 15px;
+  height: 3px;
+  background-color: #000;
+}
+
+.mouth {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  width: 20px;
+  height: 5px;
+  background-color: #000;
+  border-radius: 10px;
+  transform: translateX(-50%);
+}
+
+.body {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: #f0f0f0;
+  border: 2px solid #000;
+  border-radius: 20%;
+  transform: translateX(-50%);
+}
+
+.arms {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  width: 60px;
+  height: 10px;
+  background-color: #f0f0f0;
+  border: 2px solid #000;
+  transform: translateX(-50%);
+}
+
+/* Animación cuando se enfoca en el campo de contraseña */
+input[type="password"]:focus ~ .personita-container .eyes {
+  display: none;
+}
+
+input[type="password"]:focus ~ .personita-container .eyes-covered {
+  display: flex;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label, input {
+  margin: 10px 0;
+}
+
+input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+
 hr {
   margin: 1rem 0;
   color: inherit;
@@ -10832,3 +10977,4 @@ textarea.form-control-lg {
   width: 4rem;
   font-size: 2rem;
 }
+
