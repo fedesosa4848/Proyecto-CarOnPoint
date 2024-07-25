@@ -13,5 +13,9 @@ urlpatterns = [
     path('SignIn', views.registro, name='SignIn'),
     path('editar_perfil', views.editar_perfil, name='editar_perfil'),
     path('CambiarPass', views.CambiarPass.as_view(), name='CambiarPass'),
+    path('perfil/', views.perfil_usuario, name='perfil_usuario'),
     path('perfiles/', views.listar_perfiles, name='listar_perfiles'),
+    path('perfil/<int:user_id>/', views.ver_perfil, name='ver_perfil'),
+
+    
 ]

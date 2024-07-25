@@ -17,7 +17,10 @@ Lista de Perfiles
         {% for perfil in perfiles %}
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 {{ perfil.user.username }}
-                <a href="{% url 'send_message' perfil.user.id %}" class="btn btn-primary btn-sm">Enviar Mensaje</a>
+                <div>
+                    <a href="{% url 'ver_perfil' perfil.user.id %}" class="btn btn-secondary btn-sm">Ver Perfil</a>
+                    <a href="{% url 'send_message' perfil.user.id %}" class="btn btn-primary btn-sm">Enviar Mensaje</a>
+                </div>
             </li>
         {% endfor %}
     </ul>

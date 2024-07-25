@@ -1,0 +1,24 @@
+{% extends "inicio/index.html" %}
+
+{% block title_head %}
+Perfil de {{ usuario.username }}
+{% endblock title_head %}
+
+{% block h1_header %}
+Perfil de {{ usuario.username }}
+{% endblock h1_header %}
+
+{% block about_this_page %}Información del usuario {{ usuario.username }}{% endblock about_this_page %}
+
+{% block sub_info_info %}
+<div class="container mt-5">
+    <h1 class="mb-4">Perfil de {{ usuario.username }}</h1>
+    <p><strong>Username:</strong> {{ usuario.username }}</p>
+    <p><strong>Email:</strong> {{ usuario.email }}</p>
+    {% if usuario.datauserextra %}
+        <p><strong>Avatar:</strong> <img src="{{ usuario.datauserextra.avatar.url }}" alt="Avatar" class="avatar"></p>
+    {% else %}
+        <p><strong>Avatar:</strong> <i class="bi bi-person-circle avatar"></i></p>
+    {% endif %}
+</div>
+{% endblock sub_info_info %}

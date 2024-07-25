@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -8,6 +8,8 @@ from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from users.models import DataUserExtra
+from django.contrib.auth.models import User
+
 
 def log(request):
     if request.method == 'POST':
@@ -80,3 +82,13 @@ class CambiarPass(PasswordChangeView):
 def listar_perfiles(request):
     perfiles = DataUserExtra.objects.all()
     return render(request, 'listar_perfiles.html', {'perfiles': perfiles})
+
+@login_required
+def perfil_usuario(request):
+    user = request.user
+    user_extra = DataUserExtra.objects.get(user=user)
+    return render(request, 'perfil_usuario.html', {'user': user, 'user_extra': user_extra})
+
+def ver_perfil(request, user_id):
+    usuario = get_object_or_404(User, pk=user_id)
+    return render(request, 'ver_perfil.html', {'usuario': usuario})

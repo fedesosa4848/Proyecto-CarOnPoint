@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title_head %}
+Perfil de Usuario
+{% endblock title_head %}
+
+{% block h1_header %}
+Perfil de {{ user.username }}
+{% endblock h1_header %}
+
+{% block about_this_page %}
+Detalles del perfil del usuario
+{% endblock about_this_page %}
+
+{% block sub_info_info %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            {% if user_extra.avatar %}
+                <img src="{{ user_extra.avatar.url }}" alt="Avatar" class="img-thumbnail">
+            {% else %}
+                <i class="bi bi-person-circle avatar"></i>
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <h3>{{ user.username }}</h3>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Fecha de registro:</strong> {{ user.date_joined|date:"d M Y H:i" }}</p>
+            <!-- Puedes agregar más campos aquí si los tienes -->
+        </div>
+    </div>
+</div>
+{% endblock sub_info_info %}
