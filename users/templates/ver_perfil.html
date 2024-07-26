@@ -17,6 +17,7 @@ Perfil de {{ usuario.username }}
     <p><strong>Email:</strong> {{ usuario.email }}</p>
     {% if usuario.datauserextra %}
         <p><strong>Avatar:</strong> <img src="{{ usuario.datauserextra.avatar.url }}" alt="Avatar" class="avatar"></p>
+        <p><strong>Sobre mí:</strong> {{ usuario.datauserextra.about_me }}</p>
     {% else %}
         <p><strong>Avatar:</strong> <i class="bi bi-person-circle avatar"></i></p>
     {% endif %}

@@ -5,7 +5,7 @@ Perfil de Usuario
 {% endblock title_head %}
 
 {% block h1_header %}
-Perfil de {{ user.username }}
+Perfil de {{ request.user.username }}
 {% endblock h1_header %}
 
 {% block about_this_page %}
@@ -16,17 +16,23 @@ Detalles del perfil del usuario
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-4">
-            {% if user_extra.avatar %}
-                <img src="{{ user_extra.avatar.url }}" alt="Avatar" class="img-thumbnail">
+            {% if datauserextra.avatar %}
+                <img src="{{ datauserextra.avatar.url }}" alt="Avatar" class="img-thumbnail">
             {% else %}
                 <i class="bi bi-person-circle avatar"></i>
             {% endif %}
         </div>
         <div class="col-md-8">
-            <h3>{{ user.username }}</h3>
-            <p><strong>Email:</strong> {{ user.email }}</p>
-            <p><strong>Fecha de registro:</strong> {{ user.date_joined|date:"d M Y H:i" }}</p>
-            <!-- Puedes agregar más campos aquí si los tienes -->
+            <h3>{{ request.user.username }}</h3>
+            <p><strong>Email:</strong> {{ request.user.email }}</p>
+            <p><strong>Fecha de registro:</strong> {{ request.user.date_joined|date:"d M Y H:i" }}</p>
+            <!-- Campo about_me editable -->
+            <h4>Sobre mí</h4>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+            </form>
         </div>
     </div>
 </div>

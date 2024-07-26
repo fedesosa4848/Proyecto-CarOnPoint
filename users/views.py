@@ -10,6 +10,9 @@ from django.utils.decorators import method_decorator
 from users.models import DataUserExtra
 from django.contrib.auth.models import User
 
+from .forms import EditarAboutMeForm
+from .models import DataUserExtra
+
 
 def log(request):
     if request.method == 'POST':
@@ -92,3 +95,20 @@ def perfil_usuario(request):
 def ver_perfil(request, user_id):
     usuario = get_object_or_404(User, pk=user_id)
     return render(request, 'ver_perfil.html', {'usuario': usuario})
+
+@login_required
+def perfil_usuario(request):
+    try:
+        datauserextra = request.user.datauserextra
+    except DataUserExtra.DoesNotExist:
+        datauserextra = DataUserExtra.objects.create(user=request.user)
+
+    if request.method == 'POST':
+        form = EditarAboutMeForm(request.POST, instance=datauserextra)
+        if form.is_valid():
+            form.save()
+            return redirect('perfil_usuario')
+    else:
+        form = EditarAboutMeForm(instance=datauserextra)
+
+    return render(request, 'perfil_usuario.html', {'form': form, 'datauserextra': datauserextra})

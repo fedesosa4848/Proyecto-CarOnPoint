@@ -1,6 +1,8 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
 from django.contrib.auth.models import User
+from .models import DataUserExtra
+
 
 
 class MiFormulario(UserCreationForm):
@@ -39,3 +41,10 @@ class EditarPerfil(UserChangeForm):
             user.save()
 
         return user
+    
+class EditarAboutMeForm(forms.ModelForm):
+    about_me = forms.CharField(widget=forms.Textarea, label='Sobre mí', required=False)
+
+    class Meta:
+        model = DataUserExtra
+        fields = ['about_me']
